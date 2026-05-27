@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pusula KPSS — Kariyerine Giden Yolda Tek Mentörün</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  :root {
+    --bg: #0A0E1A;
+    --bg-2: #0F1424;
+    --surface: #131A2D;
+    --gold: #D4A857;
+    --gold-bright: #F5C76E;
+    --gold-deep: #B8893F;
+    --gold-soft: rgba(212, 168, 87, .12);
+    --gold-line: rgba(212, 168, 87, .22);
+    --cream: #F5F0E8;
+    --text: #E8E1D2;
+    --text-muted: #8B92A8;
+    --text-faint: #5A6178;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; padding-top: 56px; --fomo-h: 56px; transition: padding-top .3s ease, --fomo-h .3s ease; }
+  @media (max-width: 600px) {
+    body { padding-top: 96px; --fomo-h: 96px; }
+  }
+  body.fomo-hidden { padding-top: 0 !important; --fomo-h: 0px !important; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #2A2F45; border-radius: 3px; }
+
+  .serif { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.01em; }
+  .gold-text {
+    background: linear-gradient(135deg, #F5C76E 0%, #D4A857 50%, #B8893F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gold-shine {
+    background: linear-gradient(110deg, #B8893F 0%, #F5C76E 25%, #FFF4D6 45%, #F5C76E 65%, #B8893F 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-text 6s ease-in-out infinite;
+  }
+  .gold-btn {
+    background: linear-gradient(135deg, #F5C76E 0%, #D4A857 50%, #B8893F 100%);
+    color: #1A1206;
+    position: relative;
+    overflow: hidden;
+    transition: all .35s cubic-bezier(.22,1,.36,1);
+  }
+  .gold-btn::after {
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
+    background-size: 200% 100%;
+    background-position: -100% 0;
+    transition: background-position .8s;
+  }
+  .gold-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(212,168,87,.4), 0 0 0 1px rgba(245,199,110,.5); }
+  .gold-btn:hover::after { background-position: 200% 0; }
+
+  .gold-btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--gold-line);
+    color: var(--gold);
+    transition: all .3s ease;
+  }
+  .gold-btn-outline:hover {
+    background: var(--gold-soft);
+    border-color: var(--gold);
+    color: var(--gold-bright);
+  }
+
+  .glass {
+    background: rgba(19, 26, 45, .55);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(212, 168, 87, .1);
+  }
+
+  @keyframes shimmer-text { 0%,100%{background-position:0% 0} 50%{background-position:100% 0} }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  @keyframes gold-pulse { 0%,100%{box-shadow:0 0 24px rgba(212,168,87,.3)} 50%{box-shadow:0 0 48px rgba(212,168,87,.55)} }
+  @keyframes draw-line { from{stroke-dashoffset:300} to{stroke-dashoffset:0} }
+  @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  .feature-card { transition: all .4s cubic-bezier(.25,.46,.45,.94); }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 168, 87, .35) !important;
+    box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(212,168,87,.2);
+  }
+
+  /* Scroll reveal */
+  .reveal { opacity:0; transform:translateY(40px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+  .reveal.left { transform: translateX(-44px); }
+  .reveal.right { transform: translateX(44px); }
+  .reveal.scale { transform: scale(.94) translateY(20px); }
+  .reveal.visible { opacity:1 !important; transform: none !important; }
+  .d1{transition-delay:.08s!important}.d2{transition-delay:.16s!important}.d3{transition-delay:.24s!important}.d4{transition-delay:.32s!important}.d5{transition-delay:.4s!important}
+
+  .chart-line { stroke-dasharray: 300; animation: draw-line 2.2s ease forwards; }
+
+  /* Noise overlay */
+  .noise::before {
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:.03; mix-blend-mode:overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Compass decorative ring */
+  @keyframes rotate-ring { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .compass-ring { animation: rotate-ring 60s linear infinite; }
+
+  /* FOMO Banner */
+  @keyframes fomo-pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, .5); }
+    50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  }
+  @keyframes fomo-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .fomo-bg {
+    background: linear-gradient(90deg, #B91C1C 0%, #DC2626 25%, #EA580C 50%, #DC2626 75%, #B91C1C 100%);
+    background-size: 200% 100%;
+    animation: fomo-shimmer 8s linear infinite;
+  }
+  .cta-pulse-ring {
+    position: relative;
+  }
+  .cta-pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 2px solid rgba(245, 199, 110, .6);
+    animation: ring-expand 2s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes ring-expand {
+    0% { transform: scale(.95); opacity: 1; }
+    100% { transform: scale(1.15); opacity: 0; }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    /* Navbar */
+    .pk-nav-inner { height: 64px !important; padding: 0 !important; }
+    .pk-nav-links { display: none !important; }
+    .pk-nav-cta { padding: 8px 14px !important; font-size: 12px !important; }
+
+    /* Hero */
+    .pk-hero { padding: 100px 20px 60px !important; min-height: auto !important; }
+    .pk-hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+    .pk-hero-h1 { font-size: clamp(36px, 8vw, 48px) !important; }
+    .pk-hero-buttons { flex-direction: column !important; align-items: stretch !important; }
+    .pk-hero-buttons a, .pk-hero-buttons button { width: 100% !important; }
+    .pk-hero-stats { gap: 24px !important; flex-wrap: wrap !important; }
+    .pk-hero-stats > div { flex: 1 1 30% !important; min-width: 90px !important; }
+    .pk-hero-mockup { transform: scale(.92); transform-origin: center; }
+
+    /* Sections padding */
+    .pk-section { padding: 80px 20px !important; }
+    .pk-section-h2 { font-size: clamp(30px, 6.5vw, 40px) !important; }
+
+    /* Features */
+    .pk-features-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .pk-feature-card { padding: 28px 24px !important; }
+    .pk-compare-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+    /* Method */
+    .pk-method-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .pk-method-line { display: none !important; }
+
+    /* Testimonials */
+    .pk-test-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+    /* Pricing */
+    .pk-pricing-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+    .pk-pricing-pro { padding: 32px 24px !important; }
+    .pk-pricing-pro-h { font-size: 32px !important; }
+    .pk-price-amount { font-size: 50px !important; }
+    .pk-pro-badge { font-size: 9.5px !important; padding: 5px 10px !important; }
+    .pk-pricing-cta { font-size: 14px !important; padding: 15px 12px !important; }
+    .pk-pricing-cta-text { font-size: 13px; }
+
+    /* Final CTA */
+    .pk-final-form { flex-direction: column !important; }
+    .pk-final-form input, .pk-final-form button { width: 100% !important; }
+    .pk-appstores { flex-direction: column !important; width: 100%; padding: 0 24px; }
+    .pk-appstores > div { width: 100% !important; justify-content: center; }
+
+    /* Footer */
+    .pk-footer-inner { flex-direction: column !important; gap: 18px !important; text-align: center; }
+    .pk-footer-links { flex-wrap: wrap; justify-content: center; }
+
+    /* Hero badge */
+    .pk-hero-badge { font-size: 10px !important; }
+
+    /* Compass rings */
+    .pk-decor-ring { display: none; }
+
+    /* Vertical accent lines */
+    .pk-accent-line { display: none; }
+
+    /* Tweaks panel */
+    .pk-tweaks { right: 12px !important; left: 12px !important; bottom: 12px !important; width: auto !important; }
+  }
+
+  @media (max-width: 520px) {
+    .pk-dashboard-tabs { flex-wrap: wrap; }
+    .pk-dashboard { max-width: 100% !important; }
+    .pk-dashboard-content { height: auto !important; min-height: 320px; }
+    .pk-rota-grid { grid-template-columns: 1fr !important; }
+    .pk-hero-stats > div { flex: 1 1 45% !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const SHOPIER_URL = "https://www.shopier.com/pusulayks/46419461";
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "heroLine1": "Masada 'Bugün Ne Çalışsam?'",
+  "heroLine2": "Krizine Son Ver.",
+  "ctaText": "%60 Erken Kayıt Fırsatını Yakala",
+  "price": 1199,
+  "originalPrice": 2999,
+  "discount": 60,
+  "deadline": "30 Haziran 2026",
+  "kontenjan": 11
+}/*EDITMODE-END*/;
+
+/* ─── ICONS ─── */
+const IconCompass = ({size=20}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <circle cx="12" cy="12" r="10"/>
+    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+  </svg>
+);
+const IconShield = ({size=14}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+  </svg>
+);
+const IconCalendar = ({size=22}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+);
+const IconChart = ({size=22}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/>
+  </svg>
+);
+const IconTarget = ({size=22}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+  </svg>
+);
+const IconBrain = ({size=22}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
+    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
+  </svg>
+);
+const IconBook = ({size=22}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+  </svg>
+);
+const IconCheck = ({size=10, color='#1A1206'}) => (
+  <svg width={size} height={size} viewBox="0 0 10 10" fill="none">
+    <path d="M2 5L4.2 7.2L8 3" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+/* ─── COMPASS DECORATION ─── */
+const CompassRing = ({size=280, opacity=.18}) => (
+  <svg className="compass-ring" width={size} height={size} viewBox="0 0 200 200" style={{position:'absolute', opacity}}>
+    <defs>
+      <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#F5C76E"/>
+        <stop offset="50%" stopColor="#D4A857" stopOpacity=".3"/>
+        <stop offset="100%" stopColor="#B8893F"/>
+      </linearGradient>
+    </defs>
+    <circle cx="100" cy="100" r="95" fill="none" stroke="url(#ring-grad)" strokeWidth=".5"/>
+    <circle cx="100" cy="100" r="80" fill="none" stroke="url(#ring-grad)" strokeWidth=".3" strokeDasharray="2 4"/>
+    {Array.from({length:24}).map((_,i) => {
+      const a = (i/24)*2*Math.PI;
+      const x1 = 100 + Math.cos(a)*88, y1 = 100 + Math.sin(a)*88;
+      const x2 = 100 + Math.cos(a)*(i%6===0?78:84), y2 = 100 + Math.sin(a)*(i%6===0?78:84);
+      return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D4A857" strokeWidth={i%6===0?1:.4} opacity=".6"/>;
+    })}
+    <text x="100" y="14" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">K</text>
+    <text x="100" y="194" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">G</text>
+    <text x="6" y="103" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">B</text>
+    <text x="194" y="103" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">D</text>
+  </svg>
+);
+
+/* ─── MOCKUP DASHBOARD ─── */
+function Dashboard() {
+  const [tab, setTab] = useState('rota');
+  const tabs = [
+    {id:'rota', label:'Rota Pusulam'},
+    {id:'analiz', label:'Net Analizi'},
+    {id:'mentor', label:'AI Mentor'}
+  ];
+  return (
+    <div style={{
+      background:'linear-gradient(180deg, #0F1424 0%, #0A0E1A 100%)',
+      borderRadius:14, overflow:'hidden',
+      border:'1px solid rgba(212,168,87,.18)',
+      boxShadow:'0 50px 140px rgba(0,0,0,.85), 0 0 0 1px rgba(212,168,87,.08), 0 0 80px rgba(212,168,87,.1)',
+      width:'100%', maxWidth:580
+    }}>
+      <div style={{background:'rgba(212,168,87,.06)', padding:'11px 16px', display:'flex', alignItems:'center', gap:12, borderBottom:'1px solid rgba(212,168,87,.12)'}}>
+        <div style={{display:'flex',gap:6}}>
+          <div style={{width:9,height:9,borderRadius:'50%',background:'rgba(255,255,255,.15)'}}/>
+          <div style={{width:9,height:9,borderRadius:'50%',background:'rgba(255,255,255,.15)'}}/>
+          <div style={{width:9,height:9,borderRadius:'50%',background:'#D4A857'}}/>
+        </div>
+        <div style={{display:'flex',gap:4,marginLeft:10}}>
+          {tabs.map(t => (
+            <button key={t.id} onClick={() => setTab(t.id)} style={{
+              background: tab===t.id ? 'rgba(212,168,87,.18)' : 'transparent',
+              border: tab===t.id ? '1px solid rgba(212,168,87,.4)' : '1px solid transparent',
+              color: tab===t.id ? '#F5C76E' : '#5A6178',
+              padding:'4px 11px', borderRadius:6, fontSize:11, cursor:'pointer',
+              fontFamily:'Plus Jakarta Sans', fontWeight:500, letterSpacing:'.01em', transition:'all .2s'
+            }}>{t.label}</button>
+          ))}
+        </div>
+        <div style={{marginLeft:'auto', display:'flex', alignItems:'center', gap:6, background:'linear-gradient(135deg,#F5C76E,#D4A857)', padding:'4px 11px', borderRadius:6, fontSize:11, color:'#1A1206', fontFamily:'Plus Jakarta Sans', fontWeight:700}}>
+          <IconShield size={11}/> PRO
+        </div>
+      </div>
+      <div style={{padding:18, height:340}}>
+        {tab==='rota' && <RotaView/>}
+        {tab==='analiz' && <AnalizView/>}
+        {tab==='mentor' && <MentorView/>}
+      </div>
+    </div>
+  );
+}
+
+function RotaView() {
+  const weeks = [
+    {range:'18 May – 24 May', net:'+9.2', active:true},
+    {range:'25 May – 31 May', net:'+11.4', active:false},
+    {range:'1 Haz – 7 Haz', net:'+8.6', active:false},
+    {range:'8 Haz – 14 Haz', net:'+12.1', active:false},
+  ];
+  return (
+    <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, height:'100%'}}>
+      <div>
+        <div style={{fontSize:9, color:'#D4A857', fontWeight:700, marginBottom:10, letterSpacing:'.14em'}}>HAFTALIK ROTA</div>
+        {weeks.map((w,i) => (
+          <div key={i} style={{
+            background: w.active ? 'rgba(212,168,87,.1)' : 'rgba(255,255,255,.02)',
+            border: `1px solid ${w.active ? 'rgba(212,168,87,.35)' : 'rgba(255,255,255,.05)'}`,
+            borderRadius:8, padding:'9px 11px', marginBottom:6,
+            display:'flex', alignItems:'center', justifyContent:'space-between'
+          }}>
+            <div style={{display:'flex',alignItems:'center',gap:6}}>
+              {w.active && <div style={{width:6,height:6,borderRadius:'50%',background:'#D4A857',boxShadow:'0 0 8px #D4A857'}}/>}
+              <span style={{fontSize:10.5, color: w.active ? '#E8E1D2' : '#5A6178', fontWeight: w.active ? 600 : 400}}>{w.range}</span>
+            </div>
+            <span style={{fontSize:10.5, color:'#D4A857', fontWeight:700}}>{w.net} Net</span>
+          </div>
+        ))}
+      </div>
+      <div style={{display:'flex', flexDirection:'column', gap:10}}>
+        <div style={{background:'rgba(255,255,255,.02)', borderRadius:8, padding:10, border:'1px solid rgba(212,168,87,.08)', flex:1}}>
+          <div style={{fontSize:9, color:'#D4A857', fontWeight:700, marginBottom:6, letterSpacing:'.14em'}}>NET PROJEKSİYONU</div>
+          <MiniChart/>
+        </div>
+        <div style={{background:'rgba(255,255,255,.02)', borderRadius:8, padding:10, border:'1px solid rgba(212,168,87,.08)'}}>
+          <div style={{fontSize:9, color:'#8B92A8', marginBottom:5, letterSpacing:'.1em'}}>HEDEF ATAMA PUANI</div>
+          <div style={{display:'flex', gap:14, alignItems:'baseline'}}>
+            <div style={{fontFamily:'Instrument Serif', fontSize:30, color:'#F5C76E', lineHeight:1}}>87.4</div>
+            <div style={{fontSize:9, color:'#5A6178'}}>/100 hedef</div>
+          </div>
+          <div style={{marginTop:6, height:3, background:'rgba(255,255,255,.05)', borderRadius:3, overflow:'hidden'}}>
+            <div style={{width:'82%', height:'100%', background:'linear-gradient(90deg,#B8893F,#F5C76E)'}}/>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MiniChart() {
+  const pts = "8,80 28,68 50,60 72,52 94,42 116,30 138,22 160,15";
+  const proj = "160,15 180,11 200,7 215,5";
+  return (
+    <svg viewBox="0 0 220 90" style={{width:'100%',height:90}}>
+      <defs>
+        <linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#F5C76E" stopOpacity=".35"/>
+          <stop offset="100%" stopColor="#F5C76E" stopOpacity="0"/>
+        </linearGradient>
+      </defs>
+      <polygon points={`8,80 ${pts} 160,90 8,90`} fill="url(#g-gold)"/>
+      <polyline points={pts} fill="none" stroke="#F5C76E" strokeWidth="1.8" strokeLinecap="round" className="chart-line"/>
+      <polyline points={proj} fill="none" stroke="#D4A857" strokeWidth="1.5" strokeDasharray="4 3" strokeLinecap="round" opacity=".7"/>
+      <circle cx="160" cy="15" r="2.5" fill="#F5C76E"/>
+    </svg>
+  );
+}
+
+function AnalizView() {
+  const branches = [
+    {name:'Türkçe', correct:26, wrong:4, color:'#F5C76E'},
+    {name:'Matematik', correct:18, wrong:9, color:'#D4A857'},
+    {name:'Tarih', correct:21, wrong:6, color:'#B8893F'},
+    {name:'Coğrafya', correct:14, wrong:8, color:'#A06A2D'},
+    {name:'Vatandaşlık', correct:22, wrong:3, color:'#E8B86F'},
+  ];
+  return (
+    <div>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+        <div>
+          <div style={{fontSize:9,color:'#D4A857',fontWeight:700,letterSpacing:'.14em'}}>GENEL DENEMESİ #14</div>
+          <div style={{fontSize:9,color:'#5A6178', marginTop:2}}>17 Mayıs 2026 · Pazartesi</div>
+        </div>
+        <div style={{background:'rgba(212,168,87,.15)',border:'1px solid rgba(212,168,87,.35)',borderRadius:8,padding:'4px 12px',display:'flex',gap:8,alignItems:'baseline'}}>
+          <span style={{fontFamily:'Instrument Serif', fontSize:18, color:'#F5C76E', lineHeight:1}}>78.42</span>
+          <span style={{fontSize:9,color:'#8B92A8'}}>P. Tahmini</span>
+        </div>
+      </div>
+      {branches.map((b,i) => {
+        const net = b.correct - b.wrong/4;
+        const pct = Math.round((b.correct/(b.correct+b.wrong))*100);
+        return (
+          <div key={i} style={{marginBottom:8}}>
+            <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}>
+              <span style={{fontSize:10.5,color:'#8B92A8'}}>{b.name}</span>
+              <span style={{fontSize:10.5,color:b.color,fontWeight:600}}>+{net.toFixed(2)} net</span>
+            </div>
+            <div style={{height:3,background:'rgba(255,255,255,.05)',borderRadius:3,overflow:'hidden'}}>
+              <div style={{height:'100%',width:`${pct}%`,background:b.color, transition:'width 1.2s ease'}}/>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function MentorView() {
+  const days = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+  const today = 2;
+  const tasks = [
+    [{s:'Türkçe',c:'#F5C76E'}],
+    [{s:'Mat',c:'#D4A857'},{s:'Coğ',c:'#B8893F'}],
+    [{s:'Tarih',c:'#E8B86F'},{s:'Vat',c:'#F5C76E'}, {s:'Deneme',c:'#A06A2D'}],
+    [{s:'Mat',c:'#D4A857'}],
+    [{s:'EB',c:'#F5C76E'},{s:'Tarih',c:'#E8B86F'}],
+    [{s:'Tekrar',c:'#B8893F'}],
+    null
+  ];
+  return (
+    <div>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:10}}>
+        <div>
+          <div style={{fontSize:9,color:'#D4A857',fontWeight:700,letterSpacing:'.14em'}}>YZ MENTÖR PLANI</div>
+          <div style={{fontSize:9,color:'#5A6178', marginTop:2}}>Geçmiş 4 hafta verisine göre kalibre edildi</div>
+        </div>
+        <div style={{background:'rgba(212,168,87,.15)',border:'1px solid rgba(212,168,87,.35)',borderRadius:6,padding:'3px 10px',fontSize:9,color:'#F5C76E',fontWeight:700,letterSpacing:'.05em'}}>HAFTA 4 / 16</div>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:4, marginBottom:10}}>
+        {days.map((d,i) => (
+          <div key={i}>
+            <div style={{textAlign:'center',fontSize:9,color: i===today ? '#F5C76E' : '#5A6178',marginBottom:4,fontWeight: i===today ? 700 : 400}}>{d}</div>
+            <div style={{
+              background: i===today ? 'rgba(212,168,87,.12)' : 'rgba(255,255,255,.02)',
+              border:`1px solid ${i===today ? 'rgba(212,168,87,.4)' : 'rgba(212,168,87,.08)'}`,
+              borderRadius:6, padding:'4px 3px', minHeight:70, display:'flex', flexDirection:'column', gap:2
+            }}>
+              {tasks[i] ? tasks[i].map((t,j) => (
+                <div key={j} style={{background:t.c+'22',border:`1px solid ${t.c}55`,borderRadius:3,padding:'2px 3px',fontSize:8,color:t.c,fontWeight:600,textAlign:'center'}}>{t.s}</div>
+              )) : <div style={{fontSize:8,color:'#1E293B',textAlign:'center',marginTop:8}}>—</div>}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{background:'rgba(212,168,87,.06)',border:'1px solid rgba(212,168,87,.15)',borderRadius:8,padding:'10px 12px',display:'flex',gap:10}}>
+        <div style={{width:26,height:26,borderRadius:'50%',background:'linear-gradient(135deg,#F5C76E,#B8893F)',display:'flex',alignItems:'center',justifyContent:'center',color:'#1A1206',flexShrink:0}}>
+          <IconCompass size={14}/>
+        </div>
+        <div>
+          <div style={{fontSize:10,fontWeight:700,color:'#F5C76E', marginBottom:2}}>Çarşamba — derin odak günü</div>
+          <div style={{fontSize:10,color:'#8B92A8',lineHeight:1.5}}>Son Coğrafya denemende kıtaların iklim özelliklerinde %38 hata. Bugün bu konuyla başlayalım.</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── FOMO STICKY BANNER ─── */
+const FOMO_CYCLES = [
+  { duration: (12*60 + 43)*60*1000, start: 54,  end: 7 },
+  { duration: 12*60*60*1000,         start: 100, end: 7 },
+];
+const FOMO_STORAGE_CYCLE = 'pkpss_fomo_cycle_v3';
+const FOMO_STORAGE_END   = 'pkpss_fomo_end_v3';
+const FOMO_STORAGE_DONE  = 'pkpss_fomo_done_v3';
+
+function FomoBanner() {
+  const [done, setDone] = useState(() => localStorage.getItem(FOMO_STORAGE_DONE) === '1');
+  const [cycleIdx, setCycleIdx] = useState(() => Math.min(parseInt(localStorage.getItem(FOMO_STORAGE_CYCLE) || '0', 10), FOMO_CYCLES.length - 1));
+  const [end, setEnd] = useState(() => {
+    const stored = parseInt(localStorage.getItem(FOMO_STORAGE_END) || '0', 10);
+    if (stored && stored > Date.now()) return stored;
+    const idx = Math.min(parseInt(localStorage.getItem(FOMO_STORAGE_CYCLE) || '0', 10), FOMO_CYCLES.length - 1);
+    const fresh = Date.now() + FOMO_CYCLES[idx].duration;
+    localStorage.setItem(FOMO_STORAGE_END, String(fresh));
+    return fresh;
+  });
+  const [now, setNow] = useState(Date.now());
+  const [flash, setFlash] = useState(false);
+
+  useEffect(() => {
+    if (done) return;
+    const tick = () => {
+      const t = Date.now();
+      setNow(t);
+      if (t >= end && !flash) {
+        if (cycleIdx + 1 >= FOMO_CYCLES.length) {
+          localStorage.setItem(FOMO_STORAGE_DONE, '1');
+          setDone(true);
+          return;
+        }
+        setFlash(true);
+        setTimeout(() => {
+          const nextIdx = cycleIdx + 1;
+          const newEnd = Date.now() + FOMO_CYCLES[nextIdx].duration;
+          localStorage.setItem(FOMO_STORAGE_CYCLE, String(nextIdx));
+          localStorage.setItem(FOMO_STORAGE_END, String(newEnd));
+          setCycleIdx(nextIdx);
+          setEnd(newEnd);
+          setFlash(false);
+          setNow(Date.now());
+        }, 4000);
+      }
+    };
+    tick();
+    const id = setInterval(tick, 500);
+    return () => clearInterval(id);
+  }, [done, end, cycleIdx, flash]);
+
+  if (done) {
+    if (typeof document !== 'undefined') document.body.classList.add('fomo-hidden');
+    return null;
+  }
+  if (typeof document !== 'undefined') document.body.classList.remove('fomo-hidden');
+
+  const cycle = FOMO_CYCLES[cycleIdx];
+  const remaining = Math.max(0, end - now);
+  const elapsed = cycle.duration - remaining;
+  const lastHour = 60 * 60 * 1000;
+  let kontenjan;
+  if (remaining <= lastHour) {
+    // last hour: smoothly land at end value
+    const localProgress = 1 - (remaining / lastHour);
+    kontenjan = Math.max(cycle.end, Math.round(cycle.end + 2 - localProgress * 2));
+  } else {
+    const decayDuration = cycle.duration - lastHour;
+    const progress = Math.min(1, elapsed / decayDuration);
+    // ease-out so it drops fast early then slows
+    const eased = 1 - Math.pow(1 - progress, 1.6);
+    kontenjan = Math.max(cycle.end + 2, Math.round(cycle.start - (cycle.start - (cycle.end + 2)) * eased));
+  }
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const h = Math.floor(remaining / 3600000);
+  const m = Math.floor((remaining % 3600000) / 60000);
+  const s = Math.floor((remaining % 60000) / 1000);
+
+  if (flash) {
+    return (
+      <div className="fomo-bg" style={fomoBarStyle}>
+        <span style={{display:'inline-flex',alignItems:'center',gap:10, fontSize:14, fontWeight:700, letterSpacing:'.01em'}}>
+          <span style={{fontSize:18, animation:'fomo-pulse 1s ease-in-out infinite'}}>⚡</span>
+          Süre ve kontenjan artırıldı! <strong style={{fontWeight:800, color:'#FEF08A'}}>100 yeni kontenjan</strong> açıldı — sayaç yeniden başlıyor…
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="fomo-bg" style={fomoBarStyle}>
+      <span style={{display:'inline-flex',alignItems:'center',gap:8}}>
+        <span style={{
+          display:'inline-flex', width:22, height:22, borderRadius:'50%',
+          background:'rgba(0,0,0,.25)', alignItems:'center', justifyContent:'center',
+          animation:'fomo-pulse 1.8s ease-in-out infinite', fontSize:13
+        }}>⚠️</span>
+        <span style={{letterSpacing:'.005em'}}>2026 KPSS <strong style={{fontWeight:800}}>Kurucu Üye</strong> Fiyatı İçin Son:</span>
+      </span>
+      <span style={{
+        display:'inline-flex', alignItems:'center', gap:6,
+        background:'rgba(0,0,0,.35)', borderRadius:8, padding:'4px 12px',
+        fontVariantNumeric:'tabular-nums', fontWeight:800, letterSpacing:'.04em',
+        fontFamily:'JetBrains Mono, ui-monospace, monospace',
+        border:'1px solid rgba(255,255,255,.18)'
+      }}>
+        <TimeChip n={pad(h)} label="SAAT"/>
+        <span style={{opacity:.6}}>:</span>
+        <TimeChip n={pad(m)} label="DK"/>
+        <span style={{opacity:.6}}>:</span>
+        <TimeChip n={pad(s)} label="SN"/>
+      </span>
+      <span style={{display:'inline-flex',alignItems:'center',gap:7, color:'#FEF3C7'}}>
+        <span style={{width:7,height:7,borderRadius:'50%',background:'#FBBF24',boxShadow:'0 0 8px #FBBF24',animation:'fomo-pulse 1.5s ease-in-out infinite'}}/>
+        <span>Kalan Kontenjan: <strong style={{color:'#FEF08A', fontWeight:800, fontVariantNumeric:'tabular-nums'}}>{kontenjan}</strong></span>
+      </span>
+    </div>
+  );
+}
+
+const fomoBarStyle = {
+  position:'fixed', top:0, left:0, right:0, zIndex:101,
+  padding:'10px 16px',
+  display:'flex', alignItems:'center', justifyContent:'center',
+  gap:14, flexWrap:'wrap',
+  color:'#FFF8E1',
+  fontFamily:'Plus Jakarta Sans', fontSize:13.5, fontWeight:600,
+  boxShadow:'0 4px 20px rgba(220,38,38,.35)',
+  borderBottom:'1px solid rgba(0,0,0,.2)'
+};
+
+function TimeChip({ n, label }) {
+  return (
+    <span style={{display:'inline-flex', flexDirection:'column', alignItems:'center', lineHeight:1}}>
+      <span style={{fontSize:15, color:'#FFF8E1'}}>{n}</span>
+      <span style={{fontSize:7, opacity:.65, letterSpacing:'.15em', marginTop:1, fontWeight:600}}>{label}</span>
+    </span>
+  );
+}
+
+/* ─── PRICE COMPARISON ─── */
+function PriceComparison({ tweaks }) {
+  return (
+    <section className="pk-section" style={{padding:'40px 32px 100px', position:'relative'}}>
+      <div style={{maxWidth:1100, margin:'0 auto'}}>
+        <div className="reveal" style={{textAlign:'center', marginBottom:48}}>
+          <div style={{marginBottom:14}}>
+            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— KARŞILAŞTIRMA —</span>
+          </div>
+          <h2 className="pk-section-h2" style={{fontFamily:'Instrument Serif', fontSize:'clamp(32px,4vw,48px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, color:'#F5F0E8'}}>
+            Her ay para yakmak mı, <em className="gold-text" style={{fontStyle:'italic'}}>bir kez yatırım yapmak mı?</em>
+          </h2>
+        </div>
+
+        <div className="pk-compare-grid" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:20, alignItems:'stretch'}}>
+          {/* Classic */}
+          <div className="reveal left" style={{
+            background:'rgba(127, 29, 29, .08)',
+            border:'1px solid rgba(239, 68, 68, .2)',
+            borderRadius:18, padding:'32px 28px', position:'relative',
+            opacity:.85
+          }}>
+            <div style={{display:'inline-flex', alignItems:'center', gap:8, marginBottom:18}}>
+              <span style={{
+                width:28, height:28, borderRadius:'50%', background:'rgba(239,68,68,.15)',
+                border:'1px solid rgba(239,68,68,.4)',
+                display:'flex', alignItems:'center', justifyContent:'center',
+                color:'#EF4444', fontSize:18, fontWeight:800
+              }}>×</span>
+              <span style={{fontSize:11, color:'#FCA5A5', fontWeight:700, letterSpacing:'.2em'}}>KLASİK YÖNTEM</span>
+            </div>
+            <h3 style={{fontFamily:'Instrument Serif', fontSize:26, fontWeight:400, marginBottom:18, color:'#F5F0E8', letterSpacing:'-0.01em', lineHeight:1.2}}>
+              Binlerce TL'lik kurslar + aylık abonelikler
+            </h3>
+            <div style={{borderTop:'1px solid rgba(239,68,68,.12)', paddingTop:18, marginBottom:18}}>
+              {[
+                'Online kurslar: 3.500–8.000 TL',
+                'Deneme abonelikleri: ayda 200–400 TL',
+                'Soru bankaları: 1.200 TL',
+                'Karar yorgunluğu ve stres: bedava'
+              ].map((line,i) => (
+                <div key={i} style={{display:'flex', gap:10, alignItems:'flex-start', marginBottom:9}}>
+                  <span style={{color:'#EF4444', fontSize:15, lineHeight:1.4, flexShrink:0}}>×</span>
+                  <span style={{fontSize:13.5, color:'#94A3B8', lineHeight:1.55}}>{line}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{
+              background:'rgba(239,68,68,.06)', border:'1px dashed rgba(239,68,68,.25)',
+              borderRadius:10, padding:'12px 14px',
+              fontSize:13, color:'#FCA5A5'
+            }}>
+              <span style={{fontWeight:600}}>Toplam:</span> Sürekli cepten çıkan para
+            </div>
+          </div>
+
+          {/* Pusula PRO */}
+          <div className="reveal right" style={{
+            background:'linear-gradient(165deg, rgba(212,168,87,.08) 0%, rgba(184,137,63,.03) 100%), #0E1320',
+            border:'1.5px solid rgba(212,168,87,.4)',
+            borderRadius:18, padding:'32px 28px', position:'relative', overflow:'hidden',
+            boxShadow:'0 24px 60px rgba(212,168,87,.12), inset 0 1px 0 rgba(245,199,110,.1)'
+          }}>
+            <div style={{position:'absolute',top:0,left:0,right:0,height:1.5,background:'linear-gradient(90deg, transparent, #F5C76E, transparent)'}}/>
+            <div style={{display:'inline-flex', alignItems:'center', gap:8, marginBottom:18}}>
+              <span style={{
+                width:28, height:28, borderRadius:'50%', background:'linear-gradient(135deg,#F5C76E,#B8893F)',
+                display:'flex', alignItems:'center', justifyContent:'center',
+                color:'#1A1206'
+              }}><IconCheck size={13} color="#1A1206"/></span>
+              <span style={{fontSize:11, color:'#F5C76E', fontWeight:700, letterSpacing:'.2em'}}>PUSULA KPSS PRO</span>
+            </div>
+            <h3 style={{fontFamily:'Instrument Serif', fontSize:26, fontWeight:400, marginBottom:18, color:'#F5F0E8', letterSpacing:'-0.01em', lineHeight:1.2}}>
+              Sınava kadar 7/24 <em className="gold-text" style={{fontStyle:'italic'}}>kişisel YZ koçu</em>
+            </h3>
+            <div style={{borderTop:'1px solid rgba(212,168,87,.15)', paddingTop:18, marginBottom:18}}>
+              {[
+                'Her sabah sana özel günlük plan',
+                'Sınırsız deneme & branş analizi',
+                'Atama puanı projeksiyonu',
+                'Sürpriz ücret asla yok'
+              ].map((line,i) => (
+                <div key={i} style={{display:'flex', gap:10, alignItems:'flex-start', marginBottom:9}}>
+                  <IconCheck size={13} color="#F5C76E"/>
+                  <span style={{fontSize:13.5, color:'#E8E1D2', lineHeight:1.55, marginTop:-1}}>{line}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{
+              background:'rgba(212,168,87,.1)', border:'1px solid rgba(212,168,87,.3)',
+              borderRadius:10, padding:'12px 14px',
+              display:'flex', alignItems:'baseline', gap:8, flexWrap:'wrap'
+            }}>
+              <span style={{fontSize:12, color:'#8B92A8', fontWeight:600}}>Tek seferlik:</span>
+              <span style={{fontFamily:'Instrument Serif', fontSize:26, color:'#F5C76E', lineHeight:1}}>{tweaks.price} TL</span>
+              <span style={{fontSize:12, color:'#5A6178', textDecoration:'line-through'}}>{tweaks.originalPrice} TL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── NAVBAR ─── */
+function Navbar({ tweaks }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <nav style={{
+      position:'fixed', top: 'var(--fomo-h, 0px)', left:0, right:0, zIndex:100,
+      background: scrolled ? 'rgba(10,14,26,.92)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(22px) saturate(180%)' : 'none',
+      borderBottom: scrolled ? '1px solid rgba(212,168,87,.12)' : '1px solid transparent',
+      transition:'all .35s ease', padding:'0 32px'
+    }}>
+      <div className="pk-nav-inner" style={{maxWidth:1200, margin:'0 auto', height:72, display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+        <div style={{display:'flex',alignItems:'center',gap:11}}>
+          <div style={{
+            width:34, height:34,
+            background:'linear-gradient(135deg, #F5C76E, #B8893F)',
+            borderRadius:8,
+            display:'flex', alignItems:'center', justifyContent:'center',
+            color:'#1A1206',
+            boxShadow:'0 0 14px rgba(212,168,87,.4)'
+          }}>
+            <IconCompass size={18}/>
+          </div>
+          <div style={{display:'flex',alignItems:'baseline',gap:8}}>
+            <span style={{fontFamily:'Instrument Serif', fontSize:24, color:'#F5F0E8', letterSpacing:'.005em', lineHeight:1}}>Pusula</span>
+            <span style={{fontSize:10, color:'#D4A857', letterSpacing:'.32em', fontWeight:700}}>KPSS</span>
+          </div>
+        </div>
+        <div className="pk-nav-links" style={{display:'flex',gap:36}}>
+          {['Özellikler','Yöntem','Fiyatlandırma'].map(l => (
+            <a key={l} href={`#${l.toLowerCase()}`} style={{fontSize:13.5, color:'#8B92A8', textDecoration:'none', fontWeight:500, transition:'color .2s', letterSpacing:'.01em'}}
+              onMouseEnter={e => e.currentTarget.style.color='#F5C76E'}
+              onMouseLeave={e => e.currentTarget.style.color='#8B92A8'}>{l}</a>
+          ))}
+        </div>
+        <a href={SHOPIER_URL} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+          <button className="gold-btn pk-nav-cta" style={{
+            border:'none', borderRadius:10, padding:'10px 22px',
+            fontFamily:'Plus Jakarta Sans', fontSize:13.5, fontWeight:700, cursor:'pointer',
+            letterSpacing:'.005em', position:'relative', zIndex:1, whiteSpace:'nowrap'
+          }}>
+            %60 Erken Kayıt
+          </button>
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+/* ─── HERO ─── */
+function Hero({ tweaks }) {
+  return (
+    <section className="noise pk-hero" style={{
+      minHeight:'100vh', display:'flex', alignItems:'center',
+      padding:'120px 32px 60px',
+      position:'relative', overflow:'hidden',
+      background:`
+        radial-gradient(ellipse 60% 50% at 50% -10%, rgba(212,168,87,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 90%, rgba(212,168,87,.05) 0%, transparent 70%),
+        var(--bg)
+      `
+    }}>
+      <div className="pk-decor-ring"><CompassRing size={340} opacity={.1}/></div>
+      <div className="pk-decor-ring" style={{position:'absolute',left:'-5%',top:'10%'}}><CompassRing size={520} opacity={.06}/></div>
+      <div className="pk-decor-ring" style={{position:'absolute',right:'-8%',bottom:'-5%'}}><CompassRing size={460} opacity={.07}/></div>
+      
+      {/* Vertical accent lines */}
+      <div className="pk-accent-line" style={{position:'absolute', top:0, bottom:0, left:'12%', width:1, background:'linear-gradient(180deg, transparent, rgba(212,168,87,.15), transparent)'}}/>
+      <div className="pk-accent-line" style={{position:'absolute', top:0, bottom:0, right:'12%', width:1, background:'linear-gradient(180deg, transparent, rgba(212,168,87,.1), transparent)'}}/>
+
+      <div className="pk-hero-grid" style={{maxWidth:1240, margin:'0 auto', display:'grid', gridTemplateColumns:'1.05fr 1fr', gap:60, alignItems:'center', position:'relative', zIndex:1, width:'100%'}}>
+        <div>
+          <div className="reveal" style={{
+            display:'inline-flex', alignItems:'center', gap:10,
+            background:'rgba(212,168,87,.08)', border:'1px solid rgba(212,168,87,.25)',
+            borderRadius:100, padding:'7px 16px', marginBottom:32
+          }}>
+            <IconShield size={12}/>
+            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.16em'}}>2026 KPSS MÜFREDATINA UYARLANDI</span>
+          </div>
+
+          <h1 className="reveal d1 pk-hero-h1" style={{fontFamily:'Instrument Serif', fontSize:'clamp(40px, 5vw, 70px)', fontWeight:400, lineHeight:1.05, letterSpacing:'-0.015em', marginBottom:28, color:'#F5F0E8'}}>
+            {tweaks.heroLine1}<br/>
+            <span className="gold-shine"><em style={{fontStyle:'italic'}}>{tweaks.heroLine2}</em></span><br/>
+            <span style={{fontSize:'.78em', color:'#E8E1D2'}}>Yapay Zekayla Atanmayı Garantile.</span>
+          </h1>
+
+          <p className="reveal d2" style={{fontSize:17, color:'#8B92A8', lineHeight:1.75, marginBottom:44, maxWidth:540, fontWeight:400}}>
+            Aylık abonelik saçmalığına ve binlerce liralık online kurslara son. <strong style={{color:'#E8E1D2', fontWeight:600}}>2026 KPSS'ye kadar tüm programını senin yerine hazırlayan dijital koçunla tanış.</strong> Sadece tek seferlik ödeme.
+          </p>
+
+          <div className="reveal d3 pk-hero-buttons" style={{display:'flex', gap:14, alignItems:'center', flexWrap:'wrap', marginBottom:48}}>
+            <a href={SHOPIER_URL} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none'}}>
+              <button className="gold-btn cta-pulse-ring" style={{
+                border:'none', borderRadius:12, padding:'17px 36px',
+                fontFamily:'Plus Jakarta Sans', fontSize:15.5, fontWeight:700, cursor:'pointer',
+                letterSpacing:'.005em', position:'relative', zIndex:1,
+                display:'inline-flex', alignItems:'center', gap:10, whiteSpace:'nowrap',
+                animation:'gold-pulse 3.5s ease-in-out infinite'
+              }}>
+                <IconShield size={14}/> {tweaks.ctaText}
+              </button>
+            </a>
+            <button className="gold-btn-outline" style={{
+              borderRadius:12, padding:'15px 28px',
+              fontFamily:'Plus Jakarta Sans', fontSize:14.5, fontWeight:600, cursor:'pointer',
+              letterSpacing:'.005em'
+            }}>
+              Nasıl Çalışır?
+            </button>
+          </div>
+
+          <div className="reveal d4 pk-hero-stats" style={{display:'flex', gap:48}}>
+            {[
+              {v:'1.840+', l:'Atamaya hazırlanan'},
+              {v:'%97', l:'Memnuniyet oranı'},
+              {v:'4.6x', l:'Verimlilik artışı'}
+            ].map((s,i) => (
+              <div key={i}>
+                <div style={{fontFamily:'Instrument Serif', fontSize:32, color:'#F5C76E', letterSpacing:'-0.02em', lineHeight:1}}>{s.v}</div>
+                <div style={{fontSize:11, color:'#5A6178', marginTop:6, letterSpacing:'.04em'}}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="reveal right d2 pk-hero-mockup" style={{display:'flex', justifyContent:'center', animation:'float 6s ease-in-out infinite'}}>
+          <Dashboard/>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── FEATURES ─── */
+function Features() {
+  const features = [
+    {
+      icon: <IconBrain/>, badge:'OTONOM YZ',
+      title:'Otonom YZ Koçluğu',
+      desc:'Her sabah seni hedefine bir adım daha yaklaştıracak günlük yön gösterimi. Yapay zeka, geçmiş performansına göre o gün ne çalışman gerektiğini matematiksel olarak belirler.',
+      tags:['Günlük Yön','Performans Analizi']
+    },
+    {
+      icon: <IconCalendar/>, badge:'TIME-BLOCKING',
+      title:'Kişisel Time-Blocking',
+      desc:'İş, aile, kursla beraber gerçek hayatına uygun çalışma planı. Saat dilimlerine optimize edilmiş bloklarla "ne zaman çalışacağım" sorusunu ortadan kaldırır.',
+      tags:['Akıllı Plan','Sosyal Yaşam']
+    },
+    {
+      icon: <IconChart/>, badge:'PUAN & KADRO',
+      title:'Puan & Kadro Analizi',
+      desc:'Hedef kadronun geçmiş puanlarına göre eksik analizi. Atama puanı tahminin, gerçek puanlarla canlı kalibre edilen bir projeksiyonla her hafta güncellenir.',
+      tags:['Atama Puanı','Tercih Stratejisi']
+    },
+    {
+      icon: <IconTarget/>, badge:'ROTA TAKİBİ',
+      title:'Sınırsız ROTA Takibi',
+      desc:'Genel Yetenek, Genel Kültür, Eğitim Bilimleri ve ÖABT denemelerinin branş bazlı detaylı analizi. Algoritma müfredat hızını otomatik günceller, zayıf konulara tekrar döner.',
+      tags:['GY-GK','EB','ÖABT']
+    },
+  ];
+
+  return (
+    <section id="özellikler" className="pk-section" style={{padding:'140px 32px', position:'relative'}}>
+      <div style={{position:'absolute',top:'40%',left:'50%',transform:'translate(-50%,-50%)',width:'60%',height:'60%',background:'radial-gradient(ellipse, rgba(212,168,87,.04) 0%, transparent 70%)',pointerEvents:'none'}}/>
+      <div style={{maxWidth:1240, margin:'0 auto'}}>
+        <div className="reveal" style={{textAlign:'center', marginBottom:80}}>
+          <div style={{display:'inline-block', marginBottom:18}}>
+            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— YETKİNLİKLER —</span>
+          </div>
+          <h2 style={{fontFamily:'Instrument Serif', fontSize:'clamp(36px,4.5vw,60px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, marginBottom:24, color:'#F5F0E8'}}>
+            Atamaya giden yolda<br/>
+            <em className="gold-text" style={{fontStyle:'italic'}}>dört silahın var.</em>
+          </h2>
+          <p style={{fontSize:16, color:'#8B92A8', maxWidth:540, margin:'0 auto', lineHeight:1.7}}>
+            Sıradan bir takip uygulaması değil. Senin için her gün stratejik kararlar veren bir mentörlük sistemi.
+          </p>
+        </div>
+
+        <div style={{display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:24}} className="pk-features-grid">
+          {features.map((f,i) => (
+            <div key={i} className={`feature-card glass reveal scale d${i+1} pk-feature-card`} style={{
+              borderRadius:18, padding:'36px 32px',
+              position:'relative', overflow:'hidden'
+            }}>
+              {/* Decorative gold corner */}
+              <div style={{
+                position:'absolute', top:0, right:0, width:120, height:120,
+                background:'radial-gradient(circle at top right, rgba(212,168,87,.12), transparent 70%)',
+                pointerEvents:'none'
+              }}/>
+              <div style={{
+                width:54, height:54, borderRadius:12,
+                background:'linear-gradient(135deg, rgba(245,199,110,.14), rgba(184,137,63,.08))',
+                border:'1px solid rgba(212,168,87,.3)',
+                display:'flex', alignItems:'center', justifyContent:'center',
+                color:'#F5C76E', marginBottom:22
+              }}>
+                {f.icon}
+              </div>
+              <div style={{fontSize:10, color:'#D4A857', fontWeight:700, letterSpacing:'.2em', marginBottom:10}}>{f.badge}</div>
+              <h3 style={{fontFamily:'Instrument Serif', fontSize:24, fontWeight:400, marginBottom:12, letterSpacing:'-0.01em', color:'#F5F0E8'}}>{f.title}</h3>
+              <p style={{fontSize:14, color:'#8B92A8', lineHeight:1.75, marginBottom:20}}>{f.desc}</p>
+              <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
+                {f.tags.map(t => (
+                  <span key={t} style={{
+                    background:'rgba(212,168,87,.06)', border:'1px solid rgba(212,168,87,.15)',
+                    borderRadius:6, padding:'4px 10px', fontSize:11, color:'#D4A857', fontWeight:500, letterSpacing:'.02em'
+                  }}>{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── METHOD (How It Works) ─── */
+function Method() {
+  const steps = [
+    {n:'I', title:'Hedefini Tanımla', desc:'Hedef kadron, mevcut seviyen ve sınava kalan süren. Pusula KPSS, kişisel verilerinden başlayarak sana özel bir yol çizer.'},
+    {n:'II', title:'Mentörüne Güven', desc:'Her sabah yapay zekanın hazırladığı günlük plana odaklan. Sosyal yaşamın, işin ve kursunla harmoniyle çalışır.'},
+    {n:'III', title:'Atamana Yaklaş', desc:'Haftalık net projeksiyonu ile hedef puanına ne kadar yaklaştığını gör. Her deneme ile rota yeniden kalibre edilir.'}
+  ];
+
+  return (
+    <section id="yöntem" className="pk-section" style={{padding:'140px 32px', background:'linear-gradient(180deg, transparent 0%, rgba(212,168,87,.025) 50%, transparent 100%)', position:'relative'}}>
+      <div style={{maxWidth:1100, margin:'0 auto'}}>
+        <div className="reveal" style={{textAlign:'center', marginBottom:88}}>
+          <div style={{marginBottom:18}}>
+            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— YÖNTEM —</span>
+          </div>
+          <h2 style={{fontFamily:'Instrument Serif', fontSize:'clamp(36px,4.5vw,58px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, color:'#F5F0E8'}}>
+            Üç adımda <em className="gold-text" style={{fontStyle:'italic'}}>kariyer rotan</em>
+          </h2>
+        </div>
+
+        <div className="pk-method-grid" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:0, position:'relative'}}>
+          <div className="pk-method-line" style={{position:'absolute', top:42, left:'17%', width:'66%', height:1, background:'linear-gradient(90deg, transparent, rgba(212,168,87,.4), rgba(212,168,87,.4), transparent)', zIndex:0}}/>
+
+          {steps.map((s,i) => (
+            <div key={i} className={`reveal d${i+1}`} style={{textAlign:'center', padding:'0 32px', position:'relative', zIndex:1}}>
+              <div style={{
+                width:88, height:88,
+                background: 'radial-gradient(circle, #1A1F33 0%, #0F1424 100%)',
+                border: `1.5px solid ${i===1 ? '#D4A857' : 'rgba(212,168,87,.3)'}`,
+                borderRadius:'50%',
+                display:'flex', alignItems:'center', justifyContent:'center',
+                margin:'0 auto 28px',
+                fontFamily:'Instrument Serif', fontSize:34,
+                color: i===1 ? '#F5C76E' : '#D4A857',
+                boxShadow: i===1 ? '0 0 40px rgba(212,168,87,.4), inset 0 0 24px rgba(212,168,87,.1)' : 'inset 0 0 20px rgba(212,168,87,.05)',
+                position:'relative'
+              }}>
+                {s.n}
+                {/* corner accents */}
+                <div style={{position:'absolute', inset:-8, border:'1px solid rgba(212,168,87,.15)', borderRadius:'50%', pointerEvents:'none'}}/>
+              </div>
+              <h3 style={{fontFamily:'Instrument Serif', fontSize:24, fontWeight:400, marginBottom:14, letterSpacing:'-0.01em', color:'#F5F0E8'}}>{s.title}</h3>
+              <p style={{fontSize:14, color:'#8B92A8', lineHeight:1.75}}>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── TESTIMONIALS ─── */
+function Testimonials() {
+  const ts = [
+    {name:'Elif Y.', role:'2025 EB Mezunu', score:'+18 Net', text:'"Bir yıldır kaybolmuştum. Pusula KPSS, sosyal yaşamımdan ödün vermeden çalışmamı sağladı. Atamaya çok yakınım."'},
+    {name:'Mehmet K.', role:'Hukuk Mezunu / A Grubu', score:'82.4 Puan', text:'"Hedef kadromun geçmiş puanlarına bakıp eksiklerimi söyledi. Tercih dönemine güvenle hazırlanıyorum."'},
+    {name:'Burcu T.', role:'ÖABT Adayı', score:'+24 Net', text:'"YZ mentor, çalışırken nerede zaman kaybettiğimi gösterdi. Artık her saatim sayılı bir yatırım."'},
+  ];
+
+  return (
+    <section className="pk-section" style={{padding:'120px 32px'}}>
+      <div style={{maxWidth:1240, margin:'0 auto'}}>
+        <div className="reveal" style={{textAlign:'center', marginBottom:64}}>
+          <div style={{marginBottom:18}}>
+            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— REFERANSLAR —</span>
+          </div>
+          <h2 style={{fontFamily:'Instrument Serif', fontSize:'clamp(32px,4vw,50px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, color:'#F5F0E8'}}>
+            Atamaya bir adım daha <em className="gold-text" style={{fontStyle:'italic'}}>yakın olanlar.</em>
+          </h2>
+        </div>
+        <div className="pk-test-grid" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:22}}>
+          {ts.map((t,i) => (
+            <div key={i} className={`glass reveal scale d${i+1}`} style={{borderRadius:16, padding:28, position:'relative', overflow:'hidden'}}>
+              <div style={{position:'absolute', top:18, right:22, fontFamily:'Instrument Serif', fontSize:60, color:'rgba(212,168,87,.15)', lineHeight:.6, fontStyle:'italic'}}>"</div>
+              <p style={{fontFamily:'Instrument Serif', fontSize:18, fontStyle:'italic', color:'#E8E1D2', lineHeight:1.55, marginBottom:24}}>{t.text}</p>
+              <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', borderTop:'1px solid rgba(212,168,87,.1)', paddingTop:16}}>
+                <div>
+                  <div style={{fontSize:13.5, fontWeight:600, color:'#F5F0E8'}}>{t.name}</div>
+                  <div style={{fontSize:11, color:'#8B92A8', marginTop:2, letterSpacing:'.02em'}}>{t.role}</div>
+                </div>
+                <div style={{background:'rgba(212,168,87,.12)',border:'1px solid rgba(212,168,87,.3)',borderRadius:8,padding:'5px 11px',fontSize:12,fontWeight:700,color:'#F5C76E', letterSpacing:'.02em'}}>
+                  {t.score}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── PRICING ─── */
+function Pricing({ tweaks }) {
+  const starterFeatures = [
+    {label:'3 gün tam yapay zeka erişimi', sub:'Sınırsız deneme analizi'},
+    {label:'Başarı Simülatörü', sub:'Atama puanı tahmini'},
+    {label:'Temel haftalık plan', sub:'Standart şablonlar'},
+  ];
+  const proFeatures = [
+    {icon:<IconCompass size={16}/>, label:'Otonom YZ Koçluğu', sub:'Sınav gününe kadar günlük yön gösterimi'},
+    {icon:<IconCalendar size={16}/>, label:'Kişisel Time-Blocking', sub:'Kişiselleştirilmiş günlük çalışma programı'},
+    {icon:<IconChart size={16}/>, label:'Puan & Kadro Analizi', sub:'Hedef kadrona göre eksik analizi'},
+    {icon:<IconTarget size={16}/>, label:'Sınırsız ROTA Takibi', sub:'Sınırsız analiz ve rota revizyonu'},
+  ];
+
+  return (
+    <section id="fiyatlandırma" className="pk-section" style={{padding:'140px 32px', position:'relative', overflow:'hidden'}}>
+      <div style={{position:'absolute', top:'45%', left:'50%', transform:'translate(-50%,-50%)', width:800, height:500, background:'radial-gradient(ellipse, rgba(212,168,87,.08) 0%, transparent 70%)', pointerEvents:'none'}}/>
+
+      <div style={{maxWidth:1000, margin:'0 auto', position:'relative', zIndex:1}}>
+        <div className="reveal" style={{textAlign:'center', marginBottom:64}}>
+          <div style={{marginBottom:18}}>
+            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— YATIRIM —</span>
+          </div>
+          <h2 style={{fontFamily:'Instrument Serif', fontSize:'clamp(36px,4.5vw,58px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, marginBottom:20, color:'#F5F0E8'}}>
+            Kariyerine giden yolda <em className="gold-text" style={{fontStyle:'italic'}}>tek bir adım.</em>
+          </h2>
+          <p style={{fontSize:15.5, color:'#8B92A8', maxWidth:540, margin:'0 auto', lineHeight:1.7}}>
+            Abonelik yok, sürpriz kesinti yok. Sınav gününe kadar tek seferlik bir ödemeyle tüm yapay zeka gücü senin.
+          </p>
+        </div>
+
+        <div className="pk-pricing-grid" style={{display:'grid', gridTemplateColumns:'0.95fr 1.15fr', gap:22, alignItems:'center'}}>
+
+          {/* Starter */}
+          <div className="glass feature-card reveal left" style={{
+            borderRadius:18, padding:'36px 30px',
+            position:'relative'
+          }}>
+            <div style={{display:'inline-flex',alignItems:'center',gap:6,fontSize:10,color:'#8B92A8',fontWeight:700,letterSpacing:'.18em',marginBottom:14}}>
+              <span style={{width:6,height:6,borderRadius:'50%',background:'#5A6178',display:'inline-block'}}/>
+              BAŞLANGIÇ
+            </div>
+            <div style={{fontFamily:'Instrument Serif', fontSize:30, fontWeight:400, letterSpacing:'-0.01em', marginBottom:24, color:'#F5F0E8', lineHeight:1.1}}>
+              3 Günlük Tanışma
+            </div>
+            <div style={{marginBottom:6, display:'flex', alignItems:'flex-end', gap:6}}>
+              <span style={{fontFamily:'Instrument Serif', fontSize:60, fontWeight:400, letterSpacing:'-0.03em', color:'#F5F0E8', lineHeight:1}}>0</span>
+              <span style={{fontSize:22, fontWeight:600, color:'#8B92A8', marginBottom:10}}>TL</span>
+            </div>
+            <div style={{fontSize:12, color:'#5A6178', marginBottom:32, letterSpacing:'.01em'}}>Kredi kartı gerekmez · Anında başla</div>
+
+            <div style={{borderTop:'1px solid rgba(212,168,87,.1)', paddingTop:24, marginBottom:32}}>
+              {starterFeatures.map((f,i) => (
+                <div key={i} style={{display:'flex', alignItems:'flex-start', gap:12, marginBottom:16}}>
+                  <div style={{width:20, height:20, borderRadius:'50%', border:'1px solid #5A6178', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:2}}>
+                    <IconCheck color="#5A6178" size={10}/>
+                  </div>
+                  <div>
+                    <div style={{fontSize:13.5, color:'#E8E1D2', fontWeight:500}}>{f.label}</div>
+                    <div style={{fontSize:11.5, color:'#5A6178', marginTop:2}}>{f.sub}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button className="gold-btn-outline" style={{
+              width:'100%', padding:'14px', borderRadius:11,
+              fontFamily:'Plus Jakarta Sans',
+              fontSize:14, fontWeight:600, cursor:'pointer',
+              letterSpacing:'.01em'
+            }}>
+              Ücretsiz Başla
+            </button>
+          </div>
+
+          {/* PRO */}
+          <div className="reveal right pk-pricing-pro" style={{
+            borderRadius:20,
+            padding:'40px 36px',
+            background:'linear-gradient(165deg, rgba(212,168,87,.06) 0%, rgba(184,137,63,.02) 100%), #0E1320',
+            border:'1.5px solid rgba(212,168,87,.45)',
+            boxShadow:'0 0 0 1px rgba(212,168,87,.12), 0 30px 80px rgba(212,168,87,.15), inset 0 1px 0 rgba(245,199,110,.1)',
+            position:'relative', overflow:'hidden',
+            transition:'all .4s cubic-bezier(.22,1,.36,1)'
+          }}
+          onMouseEnter={e => { e.currentTarget.style.boxShadow='0 0 0 1px rgba(212,168,87,.3), 0 40px 100px rgba(212,168,87,.28), inset 0 1px 0 rgba(245,199,110,.18)'; e.currentTarget.style.transform='translateY(-4px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.boxShadow='0 0 0 1px rgba(212,168,87,.12), 0 30px 80px rgba(212,168,87,.15), inset 0 1px 0 rgba(245,199,110,.1)'; e.currentTarget.style.transform='translateY(0)'; }}
+          >
+            <div style={{position:'absolute',top:0,left:0,right:0,height:1.5,background:'linear-gradient(90deg, transparent, #F5C76E, #FFF4D6, #F5C76E, transparent)'}}/>
+            <div style={{position:'absolute',top:-40,right:-40,width:200,height:200,background:'radial-gradient(circle, rgba(245,199,110,.25), transparent 70%)',pointerEvents:'none'}}/>
+            <CompassRing size={300} opacity={.05}/>
+
+            <div style={{marginBottom:18, display:'flex', justifyContent:'space-between', alignItems:'flex-start'}}>
+              <span style={{
+                display:'inline-flex', alignItems:'center', gap:7,
+                background:'rgba(212,168,87,.12)', border:'1px solid rgba(212,168,87,.35)',
+                borderRadius:100, padding:'5px 14px',
+                fontSize:10.5, fontWeight:700, color:'#F5C76E',
+                letterSpacing:'.18em'
+              }}>
+                <IconShield size={11}/>
+                KPSS PRO — SINAVA HAZIRLIK
+              </span>
+            </div>
+
+            <div style={{fontFamily:'Instrument Serif', fontSize:'clamp(34px,3.5vw,46px)', fontWeight:400, letterSpacing:'-0.02em', marginBottom:14, color:'#F5F0E8', lineHeight:1.05}}>
+              Sınava Kadar<br/>
+              <span className="gold-shine">Sınırsız Erişim.</span>
+            </div>
+            <p style={{fontSize:14, color:'#8B92A8', lineHeight:1.6, marginBottom:28, maxWidth:380}}>
+              KPSS başarısı için ihtiyacın olan her şey — tek bir ödemeyle, sınav gününe kadar açık.
+            </p>
+
+            {/* Price block */}
+            <div style={{
+              background:'linear-gradient(135deg, rgba(212,168,87,.08), rgba(184,137,63,.04))',
+              border:'1px solid rgba(212,168,87,.2)',
+              borderRadius:14, padding:'18px 22px', marginBottom:30,
+              position:'relative'
+            }}>
+              <div style={{display:'flex', alignItems:'center', gap:14, marginBottom:6}}>
+                <span style={{fontSize:14, color:'#5A6178', textDecoration:'line-through', fontWeight:500}}>{tweaks.originalPrice} TL</span>
+                <span style={{
+                  background:'rgba(212,168,87,.18)', border:'1px solid rgba(212,168,87,.4)',
+                  borderRadius:6, padding:'2.5px 9px', fontSize:10.5, color:'#F5C76E', fontWeight:700, letterSpacing:'.1em'
+                }}>%{tweaks.discount} İNDİRİM</span>
+              </div>
+              <div style={{display:'flex', alignItems:'baseline', gap:10, marginBottom:14}}>
+                <span style={{fontFamily:'Instrument Serif', fontSize:62, fontWeight:400, letterSpacing:'-0.03em', color:'#F5F0E8', lineHeight:1}} className="pk-price-amount">{tweaks.price}</span>
+                <span style={{fontFamily:'Instrument Serif', fontSize:30, color:'#F5C76E'}}>TL</span>
+                <span style={{fontSize:13, color:'#8B92A8', marginLeft:8, fontWeight:500}}>Tek Seferlik Ödeme</span>
+              </div>
+              <div style={{display:'flex', alignItems:'center', gap:8, paddingTop:12, borderTop:'1px dashed rgba(212,168,87,.2)'}}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F5C76E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span style={{fontSize:11.5, color:'#D4A857', fontWeight:600, letterSpacing:'.02em'}}>İndirim {tweaks.deadline}'da sona eriyor</span>
+              </div>
+            </div>
+
+            <div style={{marginBottom:32}}>
+              {proFeatures.map((f,i) => (
+                <div key={i} style={{display:'flex', alignItems:'flex-start', gap:14, marginBottom:14, padding:'4px 0'}}>
+                  <div style={{
+                    width:36, height:36, borderRadius:10,
+                    background:'linear-gradient(135deg, rgba(245,199,110,.14), rgba(184,137,63,.08))',
+                    border:'1px solid rgba(212,168,87,.3)',
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    color:'#F5C76E', flexShrink:0
+                  }}>
+                    {f.icon}
+                  </div>
+                  <div>
+                    <div style={{fontSize:14.5, color:'#F5F0E8', fontWeight:600, marginBottom:2}}>{f.label}</div>
+                    <div style={{fontSize:12, color:'#8B92A8'}}>{f.sub}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <a href={SHOPIER_URL} target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', display:'block'}}>
+              <button className="gold-btn" style={{
+                width:'100%', padding:'17px', borderRadius:12,
+                border:'none', fontFamily:'Plus Jakarta Sans',
+                fontSize:15.5, fontWeight:700, cursor:'pointer',
+                letterSpacing:'.005em', position:'relative', zIndex:1,
+                display:'inline-flex', alignItems:'center', justifyContent:'center', gap:10
+              }}>
+                <IconShield size={14}/> {tweaks.ctaText} — {tweaks.price} TL
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── FINAL CTA ─── */
+function FinalCTA({ tweaks }) {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  return (
+    <section style={{padding:'120px 32px', position:'relative', overflow:'hidden'}}>
+      <div style={{position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', opacity:.6}}>
+        <CompassRing size={700} opacity={.1}/>
+      </div>
+      <div className="reveal" style={{maxWidth:720, margin:'0 auto', textAlign:'center', position:'relative', zIndex:1}}>
+        <div style={{
+          width:64, height:64, margin:'0 auto 28px',
+          background:'linear-gradient(135deg, #F5C76E, #B8893F)',
+          borderRadius:'50%',
+          display:'flex', alignItems:'center', justifyContent:'center',
+          color:'#1A1206',
+          boxShadow:'0 0 40px rgba(212,168,87,.4)'
+        }}>
+          <IconCompass size={28}/>
+        </div>
+
+        <h2 style={{fontFamily:'Instrument Serif', fontSize:'clamp(38px,5vw,64px)', fontWeight:400, letterSpacing:'-0.02em', lineHeight:1.05, marginBottom:22, color:'#F5F0E8'}}>
+          Zamanı yöneten,<br/>
+          <em className="gold-text" style={{fontStyle:'italic'}}>kariyerini şekillendirir.</em>
+        </h2>
+        <p style={{fontSize:16, color:'#8B92A8', lineHeight:1.75, marginBottom:42, maxWidth:520, margin:'0 auto 42px'}}>
+          Kendi yol haritanı çizmeye bugün başla. Pusula KPSS ile sınav gününe stratejik hazırlan.
+        </p>
+
+        {submitted ? (
+          <div className="glass" style={{borderRadius:16, padding:'28px 32px', borderColor:'rgba(212,168,87,.4)'}}>
+            <div style={{fontFamily:'Instrument Serif', fontSize:32, color:'#F5C76E', marginBottom:6}}>Hoş geldin.</div>
+            <div style={{fontSize:14, color:'#8B92A8'}}>Erken erişim açıldığında seni ilk haberdar edeceğiz.</div>
+          </div>
+        ) : (
+          <div className="pk-final-form" style={{display:'flex', gap:10, maxWidth:480, margin:'0 auto'}}>
+            <input type="email" placeholder="E-posta adresin" value={email} onChange={e=>setEmail(e.target.value)}
+              style={{
+                flex:1, background:'rgba(212,168,87,.04)',
+                border:'1px solid rgba(212,168,87,.2)', borderRadius:12, padding:'15px 20px',
+                color:'#F5F0E8', fontFamily:'Plus Jakarta Sans', fontSize:14.5, outline:'none',
+                transition:'all .2s'
+              }}
+              onFocus={e=>e.target.style.borderColor='rgba(212,168,87,.5)'}
+              onBlur={e=>e.target.style.borderColor='rgba(212,168,87,.2)'}
+            />
+            <button onClick={()=>{ if(email){ window.open(SHOPIER_URL,'_blank'); setSubmitted(true); }}}
+              className="gold-btn" style={{
+                flexShrink:0, border:'none', borderRadius:12, padding:'15px 26px',
+                fontFamily:'Plus Jakarta Sans', fontSize:14.5, fontWeight:700, cursor:'pointer',
+                position:'relative', zIndex:1, whiteSpace:'nowrap', letterSpacing:'.005em'
+              }}>
+              Hemen Başla
+            </button>
+          </div>
+        )}
+
+        <div style={{fontSize:12, color:'#5A6178', marginTop:18, letterSpacing:'.02em'}}>
+          Kredi kartı gerekmez · Ücretsiz erken erişim
+        </div>
+
+        {/* Mobile coming soon */}
+        <div style={{marginTop:64, display:'flex', flexDirection:'column', alignItems:'center', gap:18}}>
+          <div style={{
+            display:'inline-flex', alignItems:'center', gap:6,
+            background:'rgba(212,168,87,.1)', border:'1px solid rgba(212,168,87,.35)',
+            borderRadius:100, padding:'5px 14px',
+            fontSize:10.5, fontWeight:700, color:'#F5C76E', letterSpacing:'.18em',
+            animation:'gold-pulse 3s ease-in-out infinite'
+          }}>
+            <span style={{width:5,height:5,borderRadius:'50%',background:'#F5C76E', boxShadow:'0 0 8px #F5C76E'}}/>
+            ÇOK YAKINDA
+          </div>
+
+          <div className="pk-appstores" style={{display:'flex', gap:12}}>
+            <div className="glass" style={{opacity:.55, borderRadius:12, padding:'10px 20px', display:'flex', alignItems:'center', gap:12, userSelect:'none'}}>
+              <svg width="22" height="26" viewBox="0 0 20 24" fill="#F5F0E8">
+                <path d="M14.94 5.19A4.38 4.38 0 0 0 16 2a4.44 4.44 0 0 0-3 1.52 4.17 4.17 0 0 0-1 3.09 3.69 3.69 0 0 0 2.94-1.42zm2.52 7.44a4.51 4.51 0 0 1 2.16-3.81 4.66 4.66 0 0 0-3.66-2c-1.56-.16-3 .91-3.83.91-.83 0-2-.89-3.3-.87A4.92 4.92 0 0 0 4.69 9.4C2.93 12.45 4.24 17 6 19.47c.8 1.21 1.8 2.59 3.12 2.54 1.23-.05 1.72-.81 3.22-.81 1.5 0 1.9.81 3.22.79 1.32-.02 2.22-1.24 3.06-2.45a11 11 0 0 0 1.38-2.85 4.41 4.41 0 0 1-2.54-4.06z"/>
+              </svg>
+              <div style={{textAlign:'left'}}>
+                <div style={{fontSize:9, color:'#8B92A8', letterSpacing:'.06em'}}>DOWNLOAD ON THE</div>
+                <div style={{fontSize:14, color:'#F5F0E8', fontWeight:700, lineHeight:1.2}}>App Store</div>
+              </div>
+            </div>
+            <div className="glass" style={{opacity:.55, borderRadius:12, padding:'10px 20px', display:'flex', alignItems:'center', gap:12, userSelect:'none'}}>
+              <svg width="23" height="26" viewBox="0 0 21 24" fill="none">
+                <path d="M1.22.84 12.2 12 1.22 23.16A2 2 0 0 1 0 21.38V2.62A2 2 0 0 1 1.22.84z" fill="#EA4335"/>
+                <path d="M17.56 9.86 14.4 12l3.16 2.14 2.94-1.7a1 1 0 0 0 0-1.88l-2.94-1.7z" fill="#FBBC04"/>
+                <path d="M12.2 12 1.22.84l13.18 7.58L12.2 12z" fill="#4285F4"/>
+                <path d="M12.2 12l2.2 2.58L1.22 23.16 12.2 12z" fill="#34A853"/>
+              </svg>
+              <div style={{textAlign:'left'}}>
+                <div style={{fontSize:9, color:'#8B92A8', letterSpacing:'.06em'}}>GET IT ON</div>
+                <div style={{fontSize:14, color:'#F5F0E8', fontWeight:700, lineHeight:1.2}}>Google Play</div>
+              </div>
+            </div>
+          </div>
+          <p style={{fontFamily:'Instrument Serif', fontStyle:'italic', fontSize:14, color:'#5A6178', letterSpacing:'.01em'}}>
+            Pusula KPSS tüm gücüyle çok yakında telefon ve tabletinizde.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── FOOTER ─── */
+function Footer() {
+  return (
+    <footer style={{borderTop:'1px solid rgba(212,168,87,.1)', padding:'48px 32px', position:'relative'}}>
+      <div className="pk-footer-inner" style={{maxWidth:1240, margin:'0 auto', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:24}}>
+        <div style={{display:'flex',alignItems:'center',gap:11}}>
+          <div style={{width:30, height:30, background:'linear-gradient(135deg, #F5C76E, #B8893F)', borderRadius:7, display:'flex', alignItems:'center', justifyContent:'center', color:'#1A1206'}}>
+            <IconCompass size={16}/>
+          </div>
+          <div style={{display:'flex',alignItems:'baseline',gap:7}}>
+            <span style={{fontFamily:'Instrument Serif', fontSize:19, color:'#F5F0E8', lineHeight:1}}>Pusula</span>
+            <span style={{fontSize:9, color:'#D4A857', letterSpacing:'.32em', fontWeight:700}}>KPSS</span>
+          </div>
+        </div>
+        <div style={{fontSize:12.5, color:'#5A6178', letterSpacing:'.02em'}}>© 2026 Pusula KPSS. Tüm hakları saklıdır.</div>
+        <div className="pk-footer-links" style={{display:'flex',gap:28}}>
+          {['Gizlilik','Kullanım Koşulları','İletişim'].map(l => (
+            <a key={l} href="#" style={{fontSize:12.5, color:'#5A6178', textDecoration:'none', transition:'color .2s', letterSpacing:'.02em'}}
+              onMouseEnter={e=>e.target.style.color='#F5C76E'}
+              onMouseLeave={e=>e.target.style.color='#5A6178'}>{l}</a>
+          ))}
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ─── TWEAKS ─── */
+function TweaksPanel({ tweaks, setTweaks, visible }) {
+  if (!visible) return null;
+  return (
+    <div className="pk-tweaks" style={{
+      position:'fixed', bottom:24, right:24, zIndex:999,
+      background:'rgba(10,14,26,.96)', backdropFilter:'blur(20px)',
+      border:'1px solid rgba(212,168,87,.4)', borderRadius:14,
+      padding:22, width:280,
+      boxShadow:'0 24px 60px rgba(0,0,0,.7), 0 0 40px rgba(212,168,87,.15)'
+    }}>
+      <div style={{fontFamily:'Instrument Serif', fontSize:18, color:'#F5C76E', marginBottom:16, letterSpacing:'-0.005em'}}>Tweaks</div>
+
+      <label style={{fontSize:11, color:'#8B92A8', display:'block', marginBottom:6, letterSpacing:'.06em', fontWeight:600}}>HERO BAŞLIĞI 1</label>
+      <input value={tweaks.heroLine1} onChange={e=>setTweaks({...tweaks, heroLine1: e.target.value})}
+        style={{width:'100%', background:'rgba(212,168,87,.04)', border:'1px solid rgba(212,168,87,.2)', borderRadius:8, padding:'7px 10px', color:'#F5F0E8', fontFamily:'Plus Jakarta Sans', fontSize:12, outline:'none', marginBottom:12}}/>
+
+      <label style={{fontSize:11, color:'#8B92A8', display:'block', marginBottom:6, letterSpacing:'.06em', fontWeight:600}}>HERO BAŞLIĞI 2 (italik altın)</label>
+      <input value={tweaks.heroLine2} onChange={e=>setTweaks({...tweaks, heroLine2: e.target.value})}
+        style={{width:'100%', background:'rgba(212,168,87,.04)', border:'1px solid rgba(212,168,87,.2)', borderRadius:8, padding:'7px 10px', color:'#F5F0E8', fontFamily:'Plus Jakarta Sans', fontSize:12, outline:'none', marginBottom:12}}/>
+
+      <label style={{fontSize:11, color:'#8B92A8', display:'block', marginBottom:6, letterSpacing:'.06em', fontWeight:600}}>PRO FİYAT (TL)</label>
+      <input type="number" value={tweaks.price} onChange={e=>setTweaks({...tweaks, price: +e.target.value})}
+        style={{width:'100%', background:'rgba(212,168,87,.04)', border:'1px solid rgba(212,168,87,.2)', borderRadius:8, padding:'7px 10px', color:'#F5F0E8', fontFamily:'Plus Jakarta Sans', fontSize:12, outline:'none', marginBottom:12}}/>
+
+      <label style={{fontSize:11, color:'#8B92A8', display:'block', marginBottom:6, letterSpacing:'.06em', fontWeight:600}}>KALAN KONTENJAN</label>
+      <input type="number" value={tweaks.kontenjan} onChange={e=>setTweaks({...tweaks, kontenjan: +e.target.value})}
+        style={{width:'100%', background:'rgba(212,168,87,.04)', border:'1px solid rgba(212,168,87,.2)', borderRadius:8, padding:'7px 10px', color:'#F5F0E8', fontFamily:'Plus Jakarta Sans', fontSize:12, outline:'none', marginBottom:12}}/>
+
+      <label style={{fontSize:11, color:'#8B92A8', display:'block', marginBottom:6, letterSpacing:'.06em', fontWeight:600}}>İNDİRİM YÜZDESİ</label>
+      <input type="number" value={tweaks.discount} onChange={e=>setTweaks({...tweaks, discount: +e.target.value})}
+        style={{width:'100%', background:'rgba(212,168,87,.04)', border:'1px solid rgba(212,168,87,.2)', borderRadius:8, padding:'7px 10px', color:'#F5F0E8', fontFamily:'Plus Jakarta Sans', fontSize:12, outline:'none'}}/>
+    </div>
+  );
+}
+
+/* ─── REVEAL HOOK ─── */
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
+/* ─── APP ─── */
+function App() {
+  const [tweaks, setTweaks] = useState(TWEAK_DEFAULTS);
+  const [tweaksVisible, setTweaksVisible] = useState(false);
+  useReveal();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setTweaksVisible(true);
+      if (e.data?.type === '__deactivate_edit_mode') setTweaksVisible(false);
+    };
+    window.addEventListener('message', handler);
+    window.parent.postMessage({type:'__edit_mode_available'}, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  useEffect(() => {
+    if (tweaksVisible) window.parent.postMessage({type:'__edit_mode_set_keys', edits: tweaks}, '*');
+  }, [tweaks, tweaksVisible]);
+
+  return (
+    <>
+      <Navbar tweaks={tweaks}/>
+      <FomoBanner/>
+      <Hero tweaks={tweaks}/>
+      <PriceComparison tweaks={tweaks}/>
+      <Features/>
+      <Method/>
+      <Testimonials/>
+      <Pricing tweaks={tweaks}/>
+      <FinalCTA tweaks={tweaks}/>
+      <Footer/>
+      <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} visible={tweaksVisible}/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
