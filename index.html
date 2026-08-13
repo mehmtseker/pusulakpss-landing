@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0A0E1A">
+<meta name="theme-color" content="#0A0A0B">
 <meta name="description" content="KPSS için seviyeni, eksiklerini ve çalışma kapasiteni dikkate alan kişisel çalışma rotanı oluştur. Otomatik haftalık plan, Optimum Rota ve net takibiyle KPSS'ye hazırlan.">
 <link rel="canonical" href="https://www.pusulakpss.com.tr/">
 <meta property="og:title" content="Pusula KPSS — Kişisel KPSS Çalışma Rotan">
@@ -12,165 +12,122 @@
 <meta property="og:url" content="https://www.pusulakpss.com.tr/">
 <meta property="og:image" content="https://www.pusulakpss.com.tr/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<title>Pusula KPSS — Kariyerine Giden Yolda Tek Mentörün</title>
+<title>Pusula KPSS — Kişisel KPSS Çalışma Rotan</title>
 <link rel="icon" type="image/png" href="/favicon-64.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <style>
   :root {
-    --bg: #0A0E1A;
-    --bg-2: #0F1424;
-    --surface: #131A2D;
-    --gold: #D4A857;
-    --gold-bright: #F5C76E;
-    --gold-deep: #B8893F;
-    --gold-soft: rgba(212, 168, 87, .12);
-    --gold-line: rgba(212, 168, 87, .22);
-    --cream: #F5F0E8;
-    --text: #E8E1D2;
-    --text-muted: #8B92A8;
-    --text-faint: #5A6178;
+    --bg: #0A0A0B;
+    --surface: #131315;
+    --surface-2: #18181B;
+    --border: rgba(255,255,255,.08);
+    --border-strong: rgba(255,255,255,.14);
+    --accent: #C9A24A;
+    --accent-bright: #E4BD70;
+    --accent-soft: rgba(201,162,74,.10);
+    --accent-border: rgba(201,162,74,.24);
+    --text: #F2F0EA;
+    --text-muted: #9C9A93;
+    --text-faint: #67655F;
+    --radius-sm: 8px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: #2A2F45; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: #2A2A2D; border-radius: 3px; }
 
-  .serif { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.01em; }
-  .gold-text {
-    background: linear-gradient(135deg, #F5C76E 0%, #D4A857 50%, #B8893F 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .gold-btn {
-    background: linear-gradient(135deg, #F5C76E 0%, #D4A857 50%, #B8893F 100%);
-    color: #1A1206;
-    position: relative;
-    overflow: hidden;
-    transition: all .35s cubic-bezier(.22,1,.36,1);
-  }
-  .gold-btn::after {
-    content:''; position:absolute; inset:0;
-    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
-    background-size: 200% 100%;
-    background-position: -100% 0;
-    transition: background-position .8s;
-  }
-  .gold-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(212,168,87,.4), 0 0 0 1px rgba(245,199,110,.5); }
-  .gold-btn:hover::after { background-position: 200% 0; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .accent-text { color: var(--accent-bright); }
 
-  .gold-btn-outline {
+  .btn-primary {
+    background: var(--accent);
+    color: #14110A;
+    border: none;
+    transition: background-color .18s ease, transform .18s ease;
+  }
+  .btn-primary:hover { background: var(--accent-bright); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-outline {
     background: transparent;
-    border: 1.5px solid var(--gold-line);
-    color: var(--gold);
-    transition: all .3s ease;
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    transition: border-color .18s ease, background-color .18s ease;
   }
-  .gold-btn-outline:hover {
-    background: var(--gold-soft);
-    border-color: var(--gold);
-    color: var(--gold-bright);
+  .btn-outline:hover { border-color: var(--accent-border); background: var(--accent-soft); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
   }
 
-  .glass {
-    background: rgba(19, 26, 45, .55);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(212, 168, 87, .1);
-  }
+  .card-hover { transition: border-color .2s ease, transform .2s ease; }
+  .card-hover:hover { border-color: var(--border-strong); transform: translateY(-2px); }
 
-  @keyframes float-slow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
   @keyframes draw-line { from{stroke-dashoffset:300} to{stroke-dashoffset:0} }
-  @keyframes rotate-ring { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .chart-line { stroke-dasharray: 300; animation: draw-line 1.4s ease forwards; }
 
-  .feature-card { transition: all .4s cubic-bezier(.25,.46,.45,.94); }
-  .feature-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(212, 168, 87, .35) !important;
-    box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(212,168,87,.2);
-  }
-
-  /* Scroll reveal */
-  .reveal { opacity:0; transform:translateY(32px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
-  .reveal.left { transform: translateX(-36px); }
-  .reveal.right { transform: translateX(36px); }
-  .reveal.scale { transform: scale(.96) translateY(16px); }
+  .reveal { opacity:0; transform:translateY(24px); transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1); }
   .reveal.visible { opacity:1 !important; transform: none !important; }
-  .d1{transition-delay:.06s!important}.d2{transition-delay:.12s!important}.d3{transition-delay:.18s!important}.d4{transition-delay:.24s!important}.d5{transition-delay:.3s!important}
-
-  .chart-line { stroke-dasharray: 300; animation: draw-line 1.8s ease forwards; }
+  .d1{transition-delay:.05s!important}.d2{transition-delay:.1s!important}.d3{transition-delay:.15s!important}.d4{transition-delay:.2s!important}
 
   @media (prefers-reduced-motion: reduce) {
     .reveal { transition: none; opacity: 1 !important; transform: none !important; }
-    .compass-ring, .hero-float, .chart-line { animation: none !important; }
+    .chart-line { animation: none !important; }
   }
 
-  /* Noise overlay */
-  .noise::before {
-    content:''; position:absolute; inset:0; pointer-events:none; opacity:.03; mix-blend-mode:overlay;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
 
-  .compass-ring { animation: rotate-ring 90s linear infinite; }
-  .hero-float { animation: float-slow 8s ease-in-out infinite; }
-
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
-
-  /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .pk-nav-inner { height: 64px !important; padding: 0 !important; }
+    .pk-nav-inner { height: 60px !important; }
     .pk-nav-links { display: none !important; }
     .pk-nav-cta { padding: 8px 14px !important; font-size: 12px !important; }
 
-    .pk-hero { padding: 100px 20px 60px !important; min-height: auto !important; }
+    .pk-hero { padding: 96px 20px 56px !important; min-height: auto !important; }
     .pk-hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-    .pk-hero-h1 { font-size: clamp(34px, 8vw, 46px) !important; }
+    .pk-hero-h1 { font-size: clamp(32px, 8vw, 42px) !important; }
     .pk-hero-buttons { flex-direction: column !important; align-items: stretch !important; }
     .pk-hero-buttons a, .pk-hero-buttons button { width: 100% !important; }
-    .pk-hero-chips { gap: 10px !important; flex-wrap: wrap !important; }
-    .pk-hero-mockup { transform: scale(.92); transform-origin: center; order: -1; }
+    .pk-hero-chips { gap: 8px !important; flex-wrap: wrap !important; }
+    .pk-hero-mockup { order: -1; }
 
-    .pk-section { padding: 80px 20px !important; }
-    .pk-section-h2 { font-size: clamp(28px, 6.5vw, 38px) !important; }
+    .pk-section { padding: 72px 20px !important; }
+    .pk-section-h2 { font-size: clamp(26px, 6.5vw, 34px) !important; }
 
-    .pk-problem-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-    .pk-features-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
-    .pk-feature-card { padding: 28px 24px !important; }
-    .pk-compare-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .pk-problem-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .pk-features-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .pk-feature-card { padding: 24px 22px !important; }
 
-    .pk-method-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .pk-method-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
     .pk-method-line { display: none !important; }
 
-    .pk-ai-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .pk-ai-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
 
-    .pk-pricing-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-    .pk-pricing-pro { padding: 32px 24px !important; }
-    .pk-pricing-pro-h { font-size: 30px !important; }
-    .pk-price-amount { font-size: 46px !important; }
-    .pk-pro-badge { font-size: 9.5px !important; padding: 5px 10px !important; }
-    .pk-pricing-cta { font-size: 14px !important; padding: 15px 12px !important; }
+    .pk-pricing-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .pk-pricing-pro { padding: 28px 22px !important; }
+    .pk-price-amount { font-size: 42px !important; }
 
     .pk-appstores { flex-direction: column !important; width: 100%; padding: 0 24px; }
     .pk-appstores > div { width: 100% !important; justify-content: center; }
 
-    .pk-footer-inner { flex-direction: column !important; gap: 18px !important; text-align: center; }
+    .pk-footer-inner { flex-direction: column !important; gap: 16px !important; text-align: center; }
     .pk-footer-links { flex-wrap: wrap; justify-content: center; }
-
-    .pk-hero-badge { font-size: 10px !important; }
-    .pk-decor-ring { display: none; }
-    .pk-accent-line { display: none; }
   }
 
   @media (max-width: 520px) {
     .pk-dashboard-tabs { flex-wrap: wrap; }
     .pk-dashboard { max-width: 100% !important; }
-    .pk-dashboard-content { height: auto !important; min-height: 320px; }
+    .pk-dashboard-content { height: auto !important; min-height: 300px; }
   }
 </style>
 </head>
@@ -189,16 +146,14 @@ const LEGAL = {
   mesafeli: APP_BASE + "/legal/mesafeli-satis",
   iade: APP_BASE + "/legal/iade",
 };
-const SUPPORT_EMAIL = "destek@pusulakpss.com";
-const PRICE_TL = "699";
+const SUPPORT_EMAIL = "destek@pusulayks.com";
+const PRICE_MONTHLY_TL = "599";
 
-/* Resmi 2026 KPSS sınav tarihleri (ÖSYM takvimi) — yalnız gerçek tarihe göre
-   canlı geri sayım için, hiçbir sahte/azalan sayaç yok. */
 const KPSS_EXAM_DATES_UTC = [
-  Date.UTC(2026, 8, 6),  // 6 Eylül 2026 — Lisans B / Öğretmenlik
-  Date.UTC(2026, 8, 12), // 12 Eylül 2026 — Lisans A
-  Date.UTC(2026, 9, 4),  // 4 Ekim 2026 — Ön Lisans
-  Date.UTC(2026, 9, 25), // 25 Ekim 2026 — Ortaöğretim
+  Date.UTC(2026, 8, 6),
+  Date.UTC(2026, 8, 12),
+  Date.UTC(2026, 9, 4),
+  Date.UTC(2026, 9, 25),
 ];
 
 function useSoonestExamCountdown() {
@@ -214,76 +169,51 @@ function useSoonestExamCountdown() {
 
 /* ─── ICONS ─── */
 const IconCompass = ({size=20}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
     <circle cx="12" cy="12" r="10"/>
     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
   </svg>
 );
 const IconShield = ({size=14}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
   </svg>
 );
-const IconCalendar = ({size=22}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+const IconCalendar = ({size=20}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
     <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
   </svg>
 );
-const IconChart = ({size=22}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+const IconChart = ({size=20}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
     <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/>
   </svg>
 );
-const IconTarget = ({size=22}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+const IconTarget = ({size=20}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
     <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
   </svg>
 );
-const IconBrain = ({size=22}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+const IconBrain = ({size=20}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
     <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
     <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
   </svg>
 );
-const IconRepeat = ({size=22}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+const IconRepeat = ({size=20}) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
     <path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
   </svg>
 );
-const IconCheck = ({size=10, color='#1A1206'}) => (
+const IconCheck = ({size=10, color='#14110A'}) => (
   <svg width={size} height={size} viewBox="0 0 10 10" fill="none">
     <path d="M2 5L4.2 7.2L8 3" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 const IconChevron = ({open}) => (
   <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    style={{transform: open ? 'rotate(180deg)' : 'none', transition:'transform .25s ease', flexShrink:0}}>
+    style={{transform: open ? 'rotate(180deg)' : 'none', transition:'transform .2s ease', flexShrink:0}}>
     <polyline points="6 9 12 15 18 9"/>
-  </svg>
-);
-
-/* ─── COMPASS DECORATION ─── */
-const CompassRing = ({size=280, opacity=.18}) => (
-  <svg className="compass-ring" width={size} height={size} viewBox="0 0 200 200" style={{position:'absolute', opacity}}>
-    <defs>
-      <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#F5C76E"/>
-        <stop offset="50%" stopColor="#D4A857" stopOpacity=".3"/>
-        <stop offset="100%" stopColor="#B8893F"/>
-      </linearGradient>
-    </defs>
-    <circle cx="100" cy="100" r="95" fill="none" stroke="url(#ring-grad)" strokeWidth=".5"/>
-    <circle cx="100" cy="100" r="80" fill="none" stroke="url(#ring-grad)" strokeWidth=".3" strokeDasharray="2 4"/>
-    {Array.from({length:24}).map((_,i) => {
-      const a = (i/24)*2*Math.PI;
-      const x1 = 100 + Math.cos(a)*88, y1 = 100 + Math.sin(a)*88;
-      const x2 = 100 + Math.cos(a)*(i%6===0?78:84), y2 = 100 + Math.sin(a)*(i%6===0?78:84);
-      return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D4A857" strokeWidth={i%6===0?1:.4} opacity=".6"/>;
-    })}
-    <text x="100" y="14" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">K</text>
-    <text x="100" y="194" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">G</text>
-    <text x="6" y="103" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">B</text>
-    <text x="194" y="103" textAnchor="middle" fontSize="8" fill="#D4A857" fontFamily="Instrument Serif">D</text>
   </svg>
 );
 
@@ -296,40 +226,33 @@ function Dashboard() {
     {id:'mentor', label:'Haftalık Program'}
   ];
   return (
-    <div style={{
-      background:'linear-gradient(180deg, #0F1424 0%, #0A0E1A 100%)',
-      borderRadius:14, overflow:'hidden',
-      border:'1px solid rgba(212,168,87,.18)',
-      boxShadow:'0 50px 140px rgba(0,0,0,.85), 0 0 0 1px rgba(212,168,87,.08), 0 0 80px rgba(212,168,87,.1)',
-      width:'100%', maxWidth:580
+    <div className="card" style={{
+      borderRadius:'var(--radius-lg)', overflow:'hidden',
+      boxShadow:'0 24px 60px rgba(0,0,0,.4)',
+      width:'100%', maxWidth:560
     }}>
-      <div style={{background:'rgba(212,168,87,.06)', padding:'11px 16px', display:'flex', alignItems:'center', gap:12, borderBottom:'1px solid rgba(212,168,87,.12)'}}>
-        <div style={{display:'flex',gap:6}}>
-          <div style={{width:9,height:9,borderRadius:'50%',background:'rgba(255,255,255,.15)'}}/>
-          <div style={{width:9,height:9,borderRadius:'50%',background:'rgba(255,255,255,.15)'}}/>
-          <div style={{width:9,height:9,borderRadius:'50%',background:'#D4A857'}}/>
-        </div>
-        <div className="pk-dashboard-tabs" style={{display:'flex',gap:4,marginLeft:10}}>
+      <div style={{padding:'12px 16px', display:'flex', alignItems:'center', gap:12, borderBottom:'1px solid var(--border)'}}>
+        <div className="pk-dashboard-tabs" style={{display:'flex',gap:4}}>
           {tabs.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)} style={{
-              background: tab===t.id ? 'rgba(212,168,87,.18)' : 'transparent',
-              border: tab===t.id ? '1px solid rgba(212,168,87,.4)' : '1px solid transparent',
-              color: tab===t.id ? '#F5C76E' : '#5A6178',
-              padding:'4px 11px', borderRadius:6, fontSize:11, cursor:'pointer',
-              fontFamily:'Plus Jakarta Sans', fontWeight:500, letterSpacing:'.01em', transition:'all .2s'
+              background: tab===t.id ? 'var(--accent-soft)' : 'transparent',
+              border: tab===t.id ? '1px solid var(--accent-border)' : '1px solid transparent',
+              color: tab===t.id ? 'var(--accent-bright)' : 'var(--text-muted)',
+              padding:'5px 11px', borderRadius:'var(--radius-sm)', fontSize:11.5, cursor:'pointer',
+              fontFamily:'Plus Jakarta Sans', fontWeight:500, transition:'all .15s'
             }}>{t.label}</button>
           ))}
         </div>
-        <div style={{marginLeft:'auto', display:'flex', alignItems:'center', gap:6, background:'linear-gradient(135deg,#F5C76E,#D4A857)', padding:'4px 11px', borderRadius:6, fontSize:11, color:'#1A1206', fontFamily:'Plus Jakarta Sans', fontWeight:700}}>
-          <IconShield size={11}/> PRO
+        <div className="mono" style={{marginLeft:'auto', display:'flex', alignItems:'center', gap:6, background:'var(--accent-soft)', border:'1px solid var(--accent-border)', padding:'3px 10px', borderRadius:'var(--radius-sm)', fontSize:10.5, color:'var(--accent-bright)', fontWeight:600, letterSpacing:'.04em'}}>
+          PRO
         </div>
       </div>
-      <div className="pk-dashboard-content" style={{padding:18, height:340}}>
+      <div className="pk-dashboard-content" style={{padding:18, height:320}}>
         {tab==='rota' && <RotaView/>}
         {tab==='analiz' && <AnalizView/>}
         {tab==='mentor' && <ProgramView/>}
       </div>
-      <p style={{fontSize:10, color:'#5A6178', padding:'0 16px 14px'}}>Örnek veridir — gerçek arayüzün veri şeklini yansıtır.</p>
+      <p style={{fontSize:10.5, color:'var(--text-faint)', padding:'0 16px 14px'}}>Örnek veridir — gerçek arayüzün veri şeklini yansıtır.</p>
     </div>
   );
 }
@@ -342,37 +265,34 @@ function RotaView() {
     {label:'4. Hafta', net:'+12.1', active:false},
   ];
   return (
-    <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, height:'100%'}}>
+    <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, height:'100%'}}>
       <div>
-        <div style={{fontSize:9, color:'#D4A857', fontWeight:700, marginBottom:10, letterSpacing:'.14em'}}>HAFTALIK ROTA</div>
+        <div className="mono" style={{fontSize:10, color:'var(--text-faint)', fontWeight:500, marginBottom:9, letterSpacing:'.08em'}}>HAFTALIK ROTA</div>
         {weeks.map((w,i) => (
           <div key={i} style={{
-            background: w.active ? 'rgba(212,168,87,.1)' : 'rgba(255,255,255,.02)',
-            border: `1px solid ${w.active ? 'rgba(212,168,87,.35)' : 'rgba(255,255,255,.05)'}`,
-            borderRadius:8, padding:'9px 11px', marginBottom:6,
+            background: w.active ? 'var(--accent-soft)' : 'var(--surface-2)',
+            border: `1px solid ${w.active ? 'var(--accent-border)' : 'var(--border)'}`,
+            borderRadius:'var(--radius-sm)', padding:'8px 10px', marginBottom:6,
             display:'flex', alignItems:'center', justifyContent:'space-between'
           }}>
-            <div style={{display:'flex',alignItems:'center',gap:6}}>
-              {w.active && <div style={{width:6,height:6,borderRadius:'50%',background:'#D4A857',boxShadow:'0 0 8px #D4A857'}}/>}
-              <span style={{fontSize:10.5, color: w.active ? '#E8E1D2' : '#5A6178', fontWeight: w.active ? 600 : 400}}>{w.label}</span>
-            </div>
-            <span style={{fontSize:10.5, color:'#D4A857', fontWeight:700}}>{w.net} Net</span>
+            <span style={{fontSize:10.5, color: w.active ? 'var(--text)' : 'var(--text-muted)', fontWeight: w.active ? 600 : 400}}>{w.label}</span>
+            <span className="mono" style={{fontSize:10.5, color:'var(--accent-bright)', fontWeight:600}}>{w.net}</span>
           </div>
         ))}
       </div>
-      <div style={{display:'flex', flexDirection:'column', gap:10}}>
-        <div style={{background:'rgba(255,255,255,.02)', borderRadius:8, padding:10, border:'1px solid rgba(212,168,87,.08)', flex:1}}>
-          <div style={{fontSize:9, color:'#D4A857', fontWeight:700, marginBottom:6, letterSpacing:'.14em'}}>NET PROJEKTÖR</div>
+      <div style={{display:'flex', flexDirection:'column', gap:8}}>
+        <div style={{background:'var(--surface-2)', borderRadius:'var(--radius-sm)', padding:10, border:'1px solid var(--border)', flex:1}}>
+          <div className="mono" style={{fontSize:10, color:'var(--text-faint)', fontWeight:500, marginBottom:6, letterSpacing:'.08em'}}>NET PROJEKTÖR</div>
           <MiniChart/>
         </div>
-        <div style={{background:'rgba(255,255,255,.02)', borderRadius:8, padding:10, border:'1px solid rgba(212,168,87,.08)'}}>
-          <div style={{fontSize:9, color:'#8B92A8', marginBottom:5, letterSpacing:'.1em'}}>HEDEF PUAN</div>
-          <div style={{display:'flex', gap:14, alignItems:'baseline'}}>
-            <div style={{fontFamily:'Instrument Serif', fontSize:30, color:'#F5C76E', lineHeight:1}}>87.4</div>
-            <div style={{fontSize:9, color:'#5A6178'}}>hedefin 82.0</div>
+        <div style={{background:'var(--surface-2)', borderRadius:'var(--radius-sm)', padding:10, border:'1px solid var(--border)'}}>
+          <div className="mono" style={{fontSize:9.5, color:'var(--text-faint)', marginBottom:4}}>HEDEF PUAN</div>
+          <div className="mono" style={{display:'flex', gap:10, alignItems:'baseline'}}>
+            <div style={{fontSize:24, color:'var(--accent-bright)', fontWeight:600, lineHeight:1}}>87.4</div>
+            <div style={{fontSize:9.5, color:'var(--text-faint)'}}>hedefin 82.0</div>
           </div>
-          <div style={{marginTop:6, height:3, background:'rgba(255,255,255,.05)', borderRadius:3, overflow:'hidden'}}>
-            <div style={{width:'82%', height:'100%', background:'linear-gradient(90deg,#B8893F,#F5C76E)'}}/>
+          <div style={{marginTop:6, height:3, background:'var(--border)', borderRadius:3, overflow:'hidden'}}>
+            <div style={{width:'82%', height:'100%', background:'var(--accent)'}}/>
           </div>
         </div>
       </div>
@@ -384,39 +304,29 @@ function MiniChart() {
   const pts = "8,80 28,68 50,60 72,52 94,42 116,30 138,22 160,15";
   const proj = "160,15 180,11 200,7 215,5";
   return (
-    <svg viewBox="0 0 220 90" style={{width:'100%',height:90}}>
-      <defs>
-        <linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#F5C76E" stopOpacity=".35"/>
-          <stop offset="100%" stopColor="#F5C76E" stopOpacity="0"/>
-        </linearGradient>
-      </defs>
-      <polygon points={`8,80 ${pts} 160,90 8,90`} fill="url(#g-gold)"/>
-      <polyline points={pts} fill="none" stroke="#F5C76E" strokeWidth="1.8" strokeLinecap="round" className="chart-line"/>
-      <polyline points={proj} fill="none" stroke="#D4A857" strokeWidth="1.5" strokeDasharray="4 3" strokeLinecap="round" opacity=".7"/>
-      <circle cx="160" cy="15" r="2.5" fill="#F5C76E"/>
+    <svg viewBox="0 0 220 90" style={{width:'100%',height:84}}>
+      <polyline points={pts} fill="none" stroke="#E4BD70" strokeWidth="1.8" strokeLinecap="round" className="chart-line"/>
+      <polyline points={proj} fill="none" stroke="#8B857A" strokeWidth="1.4" strokeDasharray="4 3" strokeLinecap="round" opacity=".7"/>
+      <circle cx="160" cy="15" r="2.5" fill="#E4BD70"/>
     </svg>
   );
 }
 
 function AnalizView() {
   const branches = [
-    {name:'Türkçe', correct:26, wrong:4, color:'#F5C76E'},
-    {name:'Matematik', correct:18, wrong:9, color:'#D4A857'},
-    {name:'Tarih', correct:21, wrong:6, color:'#B8893F'},
-    {name:'Coğrafya', correct:14, wrong:8, color:'#A06A2D'},
-    {name:'Vatandaşlık', correct:22, wrong:3, color:'#E8B86F'},
+    {name:'Türkçe', correct:26, wrong:4},
+    {name:'Matematik', correct:18, wrong:9},
+    {name:'Tarih', correct:21, wrong:6},
+    {name:'Coğrafya', correct:14, wrong:8},
+    {name:'Vatandaşlık', correct:22, wrong:3},
   ];
   return (
     <div>
-      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
-        <div>
-          <div style={{fontSize:9,color:'#D4A857',fontWeight:700,letterSpacing:'.14em'}}>GENEL DENEME #14</div>
-          <div style={{fontSize:9,color:'#5A6178', marginTop:2}}>Genel Yetenek + Genel Kültür</div>
-        </div>
-        <div style={{background:'rgba(212,168,87,.15)',border:'1px solid rgba(212,168,87,.35)',borderRadius:8,padding:'4px 12px',display:'flex',gap:8,alignItems:'baseline'}}>
-          <span style={{fontFamily:'Instrument Serif', fontSize:18, color:'#F5C76E', lineHeight:1}}>≈78.4</span>
-          <span style={{fontSize:9,color:'#8B92A8'}}>Puan tahmini</span>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
+        <div className="mono" style={{fontSize:10, color:'var(--text-faint)', letterSpacing:'.08em'}}>GENEL DENEME #14</div>
+        <div className="mono" style={{background:'var(--accent-soft)',border:'1px solid var(--accent-border)',borderRadius:'var(--radius-sm)',padding:'3px 10px',display:'flex',gap:6,alignItems:'baseline'}}>
+          <span style={{fontSize:15, color:'var(--accent-bright)', fontWeight:600}}>≈78.4</span>
+          <span style={{fontSize:9,color:'var(--text-muted)'}}>puan</span>
         </div>
       </div>
       {branches.map((b,i) => {
@@ -425,11 +335,11 @@ function AnalizView() {
         return (
           <div key={i} style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',marginBottom:3}}>
-              <span style={{fontSize:10.5,color:'#8B92A8'}}>{b.name}</span>
-              <span style={{fontSize:10.5,color:b.color,fontWeight:600}}>+{net.toFixed(2)} net</span>
+              <span style={{fontSize:10.5,color:'var(--text-muted)'}}>{b.name}</span>
+              <span className="mono" style={{fontSize:10.5,color:'var(--accent-bright)',fontWeight:600}}>+{net.toFixed(2)}</span>
             </div>
-            <div style={{height:3,background:'rgba(255,255,255,.05)',borderRadius:3,overflow:'hidden'}}>
-              <div style={{height:'100%',width:`${pct}%`,background:b.color, transition:'width 1.2s ease'}}/>
+            <div style={{height:3,background:'var(--border)',borderRadius:3,overflow:'hidden'}}>
+              <div style={{height:'100%',width:`${pct}%`,background:'var(--accent)', transition:'width 1s ease'}}/>
             </div>
           </div>
         );
@@ -442,46 +352,40 @@ function ProgramView() {
   const days = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
   const today = 2;
   const tasks = [
-    [{s:'GY',c:'#F5C76E'}],
-    [{s:'GK',c:'#D4A857'}],
-    [{s:'GY',c:'#E8B86F'},{s:'Tekrar',c:'#F5C76E'}],
-    [{s:'GK',c:'#D4A857'}],
-    [{s:'EB',c:'#F5C76E'}],
-    [{s:'Deneme',c:'#A06A2D'}],
-    null
+    [{s:'GY'}], [{s:'GK'}], [{s:'GY'},{s:'Tekrar'}], [{s:'GK'}], [{s:'EB'}], [{s:'Deneme'}], null
   ];
   return (
     <div>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:10}}>
         <div>
-          <div style={{fontSize:9,color:'#D4A857',fontWeight:700,letterSpacing:'.14em'}}>BU HAFTA — ÇALIŞMA ROTAN</div>
-          <div style={{fontSize:9,color:'#5A6178', marginTop:2}}>Kapasitene ve zayıf konularına göre otomatik oluşturuldu</div>
+          <div className="mono" style={{fontSize:10,color:'var(--text-faint)',letterSpacing:'.08em'}}>BU HAFTA</div>
+          <div style={{fontSize:10,color:'var(--text-muted)', marginTop:2}}>Kapasitene göre otomatik oluşturuldu</div>
         </div>
-        <div style={{background:'rgba(212,168,87,.15)',border:'1px solid rgba(212,168,87,.35)',borderRadius:6,padding:'3px 10px',fontSize:9,color:'#F5C76E',fontWeight:700,letterSpacing:'.05em'}}>Optimum Rota: Açık</div>
+        <div className="mono" style={{background:'var(--accent-soft)',border:'1px solid var(--accent-border)',borderRadius:'var(--radius-sm)',padding:'3px 9px',fontSize:9.5,color:'var(--accent-bright)',fontWeight:600}}>Optimum Rota: Açık</div>
       </div>
       <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:4, marginBottom:10}}>
         {days.map((d,i) => (
           <div key={i}>
-            <div style={{textAlign:'center',fontSize:9,color: i===today ? '#F5C76E' : '#5A6178',marginBottom:4,fontWeight: i===today ? 700 : 400}}>{d}</div>
+            <div className="mono" style={{textAlign:'center',fontSize:9,color: i===today ? 'var(--accent-bright)' : 'var(--text-faint)',marginBottom:4,fontWeight: i===today ? 600 : 400}}>{d}</div>
             <div style={{
-              background: i===today ? 'rgba(212,168,87,.12)' : 'rgba(255,255,255,.02)',
-              border:`1px solid ${i===today ? 'rgba(212,168,87,.4)' : 'rgba(212,168,87,.08)'}`,
-              borderRadius:6, padding:'4px 3px', minHeight:70, display:'flex', flexDirection:'column', gap:2
+              background: i===today ? 'var(--accent-soft)' : 'var(--surface-2)',
+              border:`1px solid ${i===today ? 'var(--accent-border)' : 'var(--border)'}`,
+              borderRadius:'var(--radius-sm)', padding:'4px 3px', minHeight:66, display:'flex', flexDirection:'column', gap:2
             }}>
               {tasks[i] ? tasks[i].map((t,j) => (
-                <div key={j} style={{background:t.c+'22',border:`1px solid ${t.c}55`,borderRadius:3,padding:'2px 3px',fontSize:8,color:t.c,fontWeight:600,textAlign:'center'}}>{t.s}</div>
-              )) : <div style={{fontSize:8,color:'#1E293B',textAlign:'center',marginTop:8}}>—</div>}
+                <div key={j} style={{background:'var(--surface)',border:'1px solid var(--border)',borderRadius:4,padding:'2px 3px',fontSize:8,color:'var(--text-muted)',fontWeight:500,textAlign:'center'}}>{t.s}</div>
+              )) : <div style={{fontSize:8,color:'var(--text-faint)',textAlign:'center',marginTop:8}}>—</div>}
             </div>
           </div>
         ))}
       </div>
-      <div style={{background:'rgba(212,168,87,.06)',border:'1px solid rgba(212,168,87,.15)',borderRadius:8,padding:'10px 12px',display:'flex',gap:10}}>
-        <div style={{width:26,height:26,borderRadius:'50%',background:'linear-gradient(135deg,#F5C76E,#B8893F)',display:'flex',alignItems:'center',justifyContent:'center',color:'#1A1206',flexShrink:0}}>
-          <IconRepeat size={14}/>
+      <div style={{background:'var(--surface-2)',border:'1px solid var(--border)',borderRadius:'var(--radius-sm)',padding:'10px 12px',display:'flex',gap:10}}>
+        <div style={{width:24,height:24,borderRadius:'50%',background:'var(--accent-soft)',border:'1px solid var(--accent-border)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent-bright)',flexShrink:0}}>
+          <IconRepeat size={13}/>
         </div>
         <div>
-          <div style={{fontSize:10,fontWeight:700,color:'#F5C76E', marginBottom:2}}>Çarşamba — Tekrar günü</div>
-          <div style={{fontSize:10,color:'#8B92A8',lineHeight:1.5}}>Ebbinghaus tekrar takvimine göre bu hafta gözden geçirmen gereken konular otomatik plana eklendi.</div>
+          <div style={{fontSize:10,fontWeight:600,color:'var(--text)', marginBottom:2}}>Çarşamba — Tekrar günü</div>
+          <div style={{fontSize:10,color:'var(--text-muted)',lineHeight:1.5}}>Ebbinghaus tekrar takvimine göre gözden geçirmen gereken konular otomatik plana eklendi.</div>
         </div>
       </div>
     </div>
@@ -497,121 +401,15 @@ function ProblemSection() {
     {q:'Hedefine göre nerede durduğunu biliyor musun?', a:'Deneme sonuçların bir yerde duruyor ama hedef puana göre ne anlama geldiğini gösteren bir projeksiyon yok.'},
   ];
   return (
-    <section className="pk-section" style={{padding:'40px 32px 0'}}>
-      <div style={{maxWidth:1100, margin:'0 auto'}}>
-        <div className="pk-problem-grid" style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16}}>
+    <section className="pk-section" style={{padding:'32px 32px 0'}}>
+      <div style={{maxWidth:1080, margin:'0 auto'}}>
+        <div className="pk-problem-grid" style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14}}>
           {problems.map((p,i) => (
-            <div key={i} className={`glass reveal scale d${i+1}`} style={{borderRadius:14, padding:'22px 20px'}}>
-              <div style={{fontSize:13.5, fontWeight:700, color:'#F5F0E8', marginBottom:8, lineHeight:1.4}}>{p.q}</div>
-              <div style={{fontSize:12.5, color:'#8B92A8', lineHeight:1.6}}>{p.a}</div>
+            <div key={i} className={`card reveal d${i+1}`} style={{borderRadius:'var(--radius-lg)', padding:'20px 18px'}}>
+              <div style={{fontSize:13.5, fontWeight:600, color:'var(--text)', marginBottom:8, lineHeight:1.4}}>{p.q}</div>
+              <div style={{fontSize:12.5, color:'var(--text-muted)', lineHeight:1.6}}>{p.a}</div>
             </div>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── FOMO STICKY BANNER — kaldırıldı: sahte azalan kontenjan/geri sayım
-   içeriyordu ve süresi geçmiş bir indirim tarihini göstermeye devam
-   ediyordu. Yerine hero içindeki gerçek sınav tarihi geri sayımı geldi. */
-
-/* ─── PRICE COMPARISON ─── */
-function PriceComparison() {
-  return (
-    <section className="pk-section" style={{padding:'40px 32px 100px', position:'relative'}}>
-      <div style={{maxWidth:1100, margin:'0 auto'}}>
-        <div className="reveal" style={{textAlign:'center', marginBottom:48}}>
-          <div style={{marginBottom:14}}>
-            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— KARŞILAŞTIRMA —</span>
-          </div>
-          <h2 className="pk-section-h2" style={{fontFamily:'Instrument Serif', fontSize:'clamp(32px,4vw,48px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, color:'#F5F0E8'}}>
-            Her ay para yakmak mı, <em className="gold-text" style={{fontStyle:'italic'}}>bir kez yatırım yapmak mı?</em>
-          </h2>
-        </div>
-
-        <div className="pk-compare-grid" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:20, alignItems:'stretch'}}>
-          <div className="reveal left" style={{
-            background:'rgba(127, 29, 29, .08)',
-            border:'1px solid rgba(239, 68, 68, .2)',
-            borderRadius:18, padding:'32px 28px', position:'relative',
-            opacity:.85
-          }}>
-            <div style={{display:'inline-flex', alignItems:'center', gap:8, marginBottom:18}}>
-              <span style={{
-                width:28, height:28, borderRadius:'50%', background:'rgba(239,68,68,.15)',
-                border:'1px solid rgba(239,68,68,.4)',
-                display:'flex', alignItems:'center', justifyContent:'center',
-                color:'#EF4444', fontSize:18, fontWeight:800
-              }}>×</span>
-              <span style={{fontSize:11, color:'#FCA5A5', fontWeight:700, letterSpacing:'.2em'}}>KLASİK YÖNTEM</span>
-            </div>
-            <h3 style={{fontFamily:'Instrument Serif', fontSize:26, fontWeight:400, marginBottom:18, color:'#F5F0E8', letterSpacing:'-0.01em', lineHeight:1.2}}>
-              Binlerce TL'lik kurslar + aylık abonelikler
-            </h3>
-            <div style={{borderTop:'1px solid rgba(239,68,68,.12)', paddingTop:18, marginBottom:18}}>
-              {[
-                'Online kurslar: 3.500–8.000 TL',
-                'Deneme abonelikleri: ayda 200–400 TL',
-                'Soru bankaları: 1.200 TL',
-                'Karar yorgunluğu ve ne çalışacağını bulma stresi'
-              ].map((line,i) => (
-                <div key={i} style={{display:'flex', gap:10, alignItems:'flex-start', marginBottom:9}}>
-                  <span style={{color:'#EF4444', fontSize:15, lineHeight:1.4, flexShrink:0}}>×</span>
-                  <span style={{fontSize:13.5, color:'#94A3B8', lineHeight:1.55}}>{line}</span>
-                </div>
-              ))}
-            </div>
-            <div style={{
-              background:'rgba(239,68,68,.06)', border:'1px dashed rgba(239,68,68,.25)',
-              borderRadius:10, padding:'12px 14px',
-              fontSize:13, color:'#FCA5A5'
-            }}>
-              <span style={{fontWeight:600}}>Toplam:</span> Sürekli cepten çıkan para
-            </div>
-          </div>
-
-          <div className="reveal right" style={{
-            background:'linear-gradient(165deg, rgba(212,168,87,.08) 0%, rgba(184,137,63,.03) 100%), #0E1320',
-            border:'1.5px solid rgba(212,168,87,.4)',
-            borderRadius:18, padding:'32px 28px', position:'relative', overflow:'hidden',
-            boxShadow:'0 24px 60px rgba(212,168,87,.12), inset 0 1px 0 rgba(245,199,110,.1)'
-          }}>
-            <div style={{position:'absolute',top:0,left:0,right:0,height:1.5,background:'linear-gradient(90deg, transparent, #F5C76E, transparent)'}}/>
-            <div style={{display:'inline-flex', alignItems:'center', gap:8, marginBottom:18}}>
-              <span style={{
-                width:28, height:28, borderRadius:'50%', background:'linear-gradient(135deg,#F5C76E,#B8893F)',
-                display:'flex', alignItems:'center', justifyContent:'center',
-                color:'#1A1206'
-              }}><IconCheck size={13} color="#1A1206"/></span>
-              <span style={{fontSize:11, color:'#F5C76E', fontWeight:700, letterSpacing:'.2em'}}>PUSULA KPSS PRO</span>
-            </div>
-            <h3 style={{fontFamily:'Instrument Serif', fontSize:26, fontWeight:400, marginBottom:18, color:'#F5F0E8', letterSpacing:'-0.01em', lineHeight:1.2}}>
-              Sınava kadar <em className="gold-text" style={{fontStyle:'italic'}}>tek bir plan, tek ödeme</em>
-            </h3>
-            <div style={{borderTop:'1px solid rgba(212,168,87,.15)', paddingTop:18, marginBottom:18}}>
-              {[
-                'Otomatik haftalık çalışma planı',
-                'Deneme & branş bazlı net analizi',
-                'Hedef puana göre projeksiyon',
-                'Abonelik yok — tek seferlik ödeme'
-              ].map((line,i) => (
-                <div key={i} style={{display:'flex', gap:10, alignItems:'flex-start', marginBottom:9}}>
-                  <IconCheck size={13} color="#F5C76E"/>
-                  <span style={{fontSize:13.5, color:'#E8E1D2', lineHeight:1.55, marginTop:-1}}>{line}</span>
-                </div>
-              ))}
-            </div>
-            <div style={{
-              background:'rgba(212,168,87,.1)', border:'1px solid rgba(212,168,87,.3)',
-              borderRadius:10, padding:'12px 14px',
-              display:'flex', alignItems:'baseline', gap:8, flexWrap:'wrap'
-            }}>
-              <span style={{fontSize:12, color:'#8B92A8', fontWeight:600}}>Tek seferlik:</span>
-              <span style={{fontFamily:'Instrument Serif', fontSize:26, color:'#F5C76E', lineHeight:1}}>{PRICE_TL} TL</span>
-              <span style={{fontSize:11.5, color:'#5A6178'}}>KPSS sınav tarihine kadar erişim</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -629,42 +427,37 @@ function Navbar() {
   return (
     <nav style={{
       position:'fixed', top:0, left:0, right:0, zIndex:100,
-      background: scrolled ? 'rgba(10,14,26,.92)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(22px) saturate(180%)' : 'none',
-      borderBottom: scrolled ? '1px solid rgba(212,168,87,.12)' : '1px solid transparent',
-      transition:'all .35s ease', padding:'0 32px'
+      background: scrolled ? 'rgba(10,10,11,.9)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(16px)' : 'none',
+      borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+      transition:'all .25s ease', padding:'0 32px'
     }}>
-      <div className="pk-nav-inner" style={{maxWidth:1200, margin:'0 auto', height:72, display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-        <div style={{display:'flex',alignItems:'center',gap:11}}>
+      <div className="pk-nav-inner" style={{maxWidth:1180, margin:'0 auto', height:68, display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+        <div style={{display:'flex',alignItems:'center',gap:10}}>
           <div style={{
-            width:34, height:34,
-            background:'linear-gradient(135deg, #F5C76E, #B8893F)',
-            borderRadius:8,
-            display:'flex', alignItems:'center', justifyContent:'center',
-            color:'#1A1206',
-            boxShadow:'0 0 14px rgba(212,168,87,.4)'
+            width:30, height:30, background:'var(--accent)', borderRadius:'var(--radius-sm)',
+            display:'flex', alignItems:'center', justifyContent:'center', color:'#14110A'
           }}>
-            <IconCompass size={18}/>
+            <IconCompass size={16}/>
           </div>
-          <div style={{display:'flex',alignItems:'baseline',gap:8}}>
-            <span style={{fontFamily:'Instrument Serif', fontSize:24, color:'#F5F0E8', letterSpacing:'.005em', lineHeight:1}}>Pusula</span>
-            <span style={{fontSize:10, color:'#D4A857', letterSpacing:'.32em', fontWeight:700}}>KPSS</span>
+          <div style={{display:'flex',alignItems:'baseline',gap:6}}>
+            <span style={{fontSize:16, fontWeight:700, color:'var(--text)', lineHeight:1}}>Pusula</span>
+            <span className="mono" style={{fontSize:10, color:'var(--accent-bright)', letterSpacing:'.14em', fontWeight:600}}>KPSS</span>
           </div>
         </div>
-        <div className="pk-nav-links" style={{display:'flex',gap:36}}>
+        <div className="pk-nav-links" style={{display:'flex',gap:32}}>
           {[['Özellikler','#ozellikler'],['Yöntem','#yontem'],['Fiyatlandırma','#fiyat'],['SSS','#sss']].map(([l,href]) => (
-            <a key={l} href={href} style={{fontSize:13.5, color:'#8B92A8', textDecoration:'none', fontWeight:500, transition:'color .2s', letterSpacing:'.01em'}}
-              onMouseEnter={e => e.currentTarget.style.color='#F5C76E'}
-              onMouseLeave={e => e.currentTarget.style.color='#8B92A8'}>{l}</a>
+            <a key={l} href={href} style={{fontSize:13.5, color:'var(--text-muted)', textDecoration:'none', fontWeight:500, transition:'color .15s'}}
+              onMouseEnter={e => e.currentTarget.style.color='var(--text)'}
+              onMouseLeave={e => e.currentTarget.style.color='var(--text-muted)'}>{l}</a>
           ))}
         </div>
-        <div style={{display:'flex', alignItems:'center', gap:14}}>
-          <a href={SIGNIN_HREF} className="pk-nav-links" style={{fontSize:13, color:'#8B92A8', textDecoration:'none', fontWeight:600}}>Giriş Yap</a>
+        <div style={{display:'flex', alignItems:'center', gap:12}}>
+          <a href={SIGNIN_HREF} className="pk-nav-links" style={{fontSize:13, color:'var(--text-muted)', textDecoration:'none', fontWeight:500}}>Giriş Yap</a>
           <a href={SIGNUP_HREF} style={{textDecoration:'none'}}>
-            <button className="gold-btn pk-nav-cta" style={{
-              border:'none', borderRadius:10, padding:'10px 22px',
-              fontFamily:'Plus Jakarta Sans', fontSize:13.5, fontWeight:700, cursor:'pointer',
-              letterSpacing:'.005em', position:'relative', zIndex:1, whiteSpace:'nowrap'
+            <button className="btn-primary pk-nav-cta" style={{
+              borderRadius:'var(--radius-md)', padding:'9px 18px',
+              fontFamily:'Plus Jakarta Sans', fontSize:13.5, fontWeight:600, cursor:'pointer', whiteSpace:'nowrap'
             }}>
               {PRIMARY_CTA}
             </button>
@@ -679,79 +472,66 @@ function Navbar() {
 function Hero() {
   const days = useSoonestExamCountdown();
   return (
-    <section className="noise pk-hero" style={{
-      minHeight:'100vh', display:'flex', alignItems:'center',
-      padding:'140px 32px 60px',
+    <section className="pk-hero" style={{
+      minHeight:'92vh', display:'flex', alignItems:'center',
+      padding:'132px 32px 56px',
       position:'relative', overflow:'hidden',
-      background:`
-        radial-gradient(ellipse 60% 50% at 50% -10%, rgba(212,168,87,.12) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 90%, rgba(212,168,87,.05) 0%, transparent 70%),
-        var(--bg)
-      `
+      background: `radial-gradient(ellipse 55% 45% at 50% -10%, rgba(201,162,74,.08) 0%, transparent 70%), var(--bg)`
     }}>
-      <div className="pk-decor-ring"><CompassRing size={340} opacity={.1}/></div>
-      <div className="pk-decor-ring" style={{position:'absolute',right:'-8%',bottom:'-5%'}}><CompassRing size={460} opacity={.06}/></div>
-
-      <div className="pk-accent-line" style={{position:'absolute', top:0, bottom:0, left:'12%', width:1, background:'linear-gradient(180deg, transparent, rgba(212,168,87,.15), transparent)'}}/>
-      <div className="pk-accent-line" style={{position:'absolute', top:0, bottom:0, right:'12%', width:1, background:'linear-gradient(180deg, transparent, rgba(212,168,87,.1), transparent)'}}/>
-
-      <div className="pk-hero-grid" style={{maxWidth:1240, margin:'0 auto', display:'grid', gridTemplateColumns:'1.05fr 1fr', gap:60, alignItems:'center', position:'relative', zIndex:1, width:'100%'}}>
+      <div className="pk-hero-grid" style={{maxWidth:1180, margin:'0 auto', display:'grid', gridTemplateColumns:'1.05fr 1fr', gap:56, alignItems:'center', width:'100%'}}>
         <div>
-          <div className="reveal" style={{
-            display:'inline-flex', alignItems:'center', gap:10,
-            background:'rgba(212,168,87,.08)', border:'1px solid rgba(212,168,87,.25)',
-            borderRadius:100, padding:'7px 16px', marginBottom:32
+          <div className="reveal mono" style={{
+            display:'inline-flex', alignItems:'center', gap:8,
+            border:'1px solid var(--border-strong)',
+            borderRadius:100, padding:'6px 14px', marginBottom:28
           }}>
-            <IconShield size={12}/>
-            <span className="pk-hero-badge" style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.16em'}}>2026 KPSS MÜFREDATINA GÖRE</span>
+            <span style={{width:6, height:6, borderRadius:'50%', background:'var(--accent-bright)'}}/>
+            <span style={{fontSize:11, color:'var(--text-muted)', letterSpacing:'.04em'}}>2026 KPSS MÜFREDATINA GÖRE</span>
           </div>
 
-          <h1 className="reveal d1 pk-hero-h1" style={{fontFamily:'Instrument Serif', fontSize:'clamp(40px, 5vw, 68px)', fontWeight:400, lineHeight:1.08, letterSpacing:'-0.015em', marginBottom:28, color:'#F5F0E8'}}>
+          <h1 className="reveal d1 pk-hero-h1" style={{fontSize:'clamp(36px, 4.6vw, 58px)', fontWeight:700, lineHeight:1.12, letterSpacing:'-0.02em', marginBottom:24, color:'var(--text)'}}>
             Masada "Bugün Ne Çalışsam?"<br/>
-            <em className="gold-text" style={{fontStyle:'italic'}}>Krizine Son Ver.</em>
+            <span className="accent-text">Krizine Son Ver.</span>
           </h1>
 
-          <p className="reveal d2" style={{fontSize:17, color:'#8B92A8', lineHeight:1.75, marginBottom:36, maxWidth:540, fontWeight:400}}>
-            Kapasiteni, mevcut seviyeni ve hedefini alır; KPSS'ye kadar tüm çalışma programını senin yerine hazırlayan bir rota çıkarır. <strong style={{color:'#E8E1D2', fontWeight:600}}>Abonelik yok, tek seferlik ödeme.</strong>
+          <p className="reveal d2" style={{fontSize:16.5, color:'var(--text-muted)', lineHeight:1.7, marginBottom:32, maxWidth:520}}>
+            Kapasiteni, mevcut seviyeni ve hedefini alır; KPSS'ye kadar tüm çalışma programını senin yerine hazırlayan bir rota çıkarır.
           </p>
 
-          <div className="reveal d3 pk-hero-buttons" style={{display:'flex', gap:14, alignItems:'center', flexWrap:'wrap', marginBottom:28}}>
+          <div className="reveal d3 pk-hero-buttons" style={{display:'flex', gap:12, alignItems:'center', flexWrap:'wrap', marginBottom:24}}>
             <a href={SIGNUP_HREF} style={{textDecoration:'none'}}>
-              <button className="gold-btn" style={{
-                border:'none', borderRadius:12, padding:'17px 36px',
-                fontFamily:'Plus Jakarta Sans', fontSize:15.5, fontWeight:700, cursor:'pointer',
-                letterSpacing:'.005em', position:'relative', zIndex:1,
-                display:'inline-flex', alignItems:'center', gap:10, whiteSpace:'nowrap'
+              <button className="btn-primary" style={{
+                borderRadius:'var(--radius-md)', padding:'14px 28px',
+                fontFamily:'Plus Jakarta Sans', fontSize:15, fontWeight:600, cursor:'pointer',
+                display:'inline-flex', alignItems:'center', gap:8, whiteSpace:'nowrap'
               }}>
-                <IconCompass size={14}/> {PRIMARY_CTA}
+                {PRIMARY_CTA}
               </button>
             </a>
             <a href="#yontem" style={{textDecoration:'none'}}>
-              <button className="gold-btn-outline" style={{
-                borderRadius:12, padding:'15px 28px',
-                fontFamily:'Plus Jakarta Sans', fontSize:14.5, fontWeight:600, cursor:'pointer',
-                letterSpacing:'.005em'
+              <button className="btn-outline" style={{
+                borderRadius:'var(--radius-md)', padding:'13px 24px',
+                fontFamily:'Plus Jakarta Sans', fontSize:14, fontWeight:600, cursor:'pointer'
               }}>
                 Nasıl Çalışır?
               </button>
             </a>
           </div>
 
-          <div className="reveal d4 pk-hero-chips" style={{display:'flex', gap:16, flexWrap:'wrap'}}>
+          <div className="reveal d4 pk-hero-chips mono" style={{display:'flex', gap:10, flexWrap:'wrap'}}>
             {[
-              'Tek seferlik ödeme · abonelik yok',
-              'Sınav tarihine kadar erişim',
               days != null ? `2026 KPSS'ye ${days} gün kaldı` : null,
+              'İstediğin zaman iptal et',
             ].filter(Boolean).map((c,i) => (
               <span key={i} style={{
-                fontSize:11.5, color:'#8B92A8', border:'1px solid rgba(212,168,87,.16)',
-                borderRadius:100, padding:'6px 13px', letterSpacing:'.01em'
+                fontSize:11, color:'var(--text-muted)', border:'1px solid var(--border)',
+                borderRadius:100, padding:'5px 12px'
               }}>{c}</span>
             ))}
           </div>
         </div>
 
-        <div className="reveal right d2 pk-hero-mockup hero-float" style={{display:'flex', justifyContent:'center'}}>
+        <div className="reveal d2 pk-hero-mockup" style={{display:'flex', justifyContent:'center'}}>
           <Dashboard/>
         </div>
       </div>
@@ -768,39 +548,28 @@ function Method() {
   ];
 
   return (
-    <section id="yontem" className="pk-section" style={{padding:'140px 32px', background:'linear-gradient(180deg, transparent 0%, rgba(212,168,87,.025) 50%, transparent 100%)', position:'relative'}}>
-      <div style={{maxWidth:1100, margin:'0 auto'}}>
-        <div className="reveal" style={{textAlign:'center', marginBottom:88}}>
-          <div style={{marginBottom:18}}>
-            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— YÖNTEM —</span>
-          </div>
-          <h2 className="pk-section-h2" style={{fontFamily:'Instrument Serif', fontSize:'clamp(36px,4.5vw,58px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, color:'#F5F0E8'}}>
-            Üç adımda <em className="gold-text" style={{fontStyle:'italic'}}>çalışma rotan</em>
+    <section id="yontem" className="pk-section" style={{padding:'120px 32px'}}>
+      <div style={{maxWidth:1080, margin:'0 auto'}}>
+        <div className="reveal" style={{marginBottom:64}}>
+          <div className="mono" style={{fontSize:11, color:'var(--accent-bright)', fontWeight:600, letterSpacing:'.1em', marginBottom:14}}>YÖNTEM</div>
+          <h2 className="pk-section-h2" style={{fontSize:'clamp(28px,3.6vw,42px)', fontWeight:700, letterSpacing:'-0.02em', lineHeight:1.15, color:'var(--text)', maxWidth:640}}>
+            Üç adımda çalışma rotan
           </h2>
         </div>
 
-        <div className="pk-method-grid" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:0, position:'relative'}}>
-          <div className="pk-method-line" style={{position:'absolute', top:42, left:'17%', width:'66%', height:1, background:'linear-gradient(90deg, transparent, rgba(212,168,87,.4), rgba(212,168,87,.4), transparent)', zIndex:0}}/>
+        <div className="pk-method-grid" style={{display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:32, position:'relative'}}>
+          <div className="pk-method-line" style={{position:'absolute', top:22, left:0, right:0, height:1, background:'var(--border)', zIndex:0}}/>
 
           {steps.map((s,i) => (
-            <div key={i} className={`reveal d${i+1}`} style={{textAlign:'center', padding:'0 32px', position:'relative', zIndex:1}}>
-              <div style={{
-                width:88, height:88,
-                background: 'radial-gradient(circle, #1A1F33 0%, #0F1424 100%)',
-                border: `1.5px solid ${i===1 ? '#D4A857' : 'rgba(212,168,87,.3)'}`,
-                borderRadius:'50%',
-                display:'flex', alignItems:'center', justifyContent:'center',
-                margin:'0 auto 28px',
-                fontFamily:'Instrument Serif', fontSize:28,
-                color: i===1 ? '#F5C76E' : '#D4A857',
-                boxShadow: i===1 ? '0 0 40px rgba(212,168,87,.4), inset 0 0 24px rgba(212,168,87,.1)' : 'inset 0 0 20px rgba(212,168,87,.05)',
-                position:'relative'
+            <div key={i} className={`reveal d${i+1}`} style={{position:'relative', zIndex:1}}>
+              <div className="mono" style={{
+                fontSize:14, fontWeight:600, color: i===1 ? 'var(--accent-bright)' : 'var(--text-faint)',
+                background:'var(--bg)', display:'inline-block', paddingRight:14, marginBottom:18
               }}>
                 {s.n}
-                <div style={{position:'absolute', inset:-8, border:'1px solid rgba(212,168,87,.15)', borderRadius:'50%', pointerEvents:'none'}}/>
               </div>
-              <h3 style={{fontFamily:'Instrument Serif', fontSize:24, fontWeight:400, marginBottom:14, letterSpacing:'-0.01em', color:'#F5F0E8'}}>{s.title}</h3>
-              <p style={{fontSize:14, color:'#8B92A8', lineHeight:1.75}}>{s.desc}</p>
+              <h3 style={{fontSize:19, fontWeight:700, marginBottom:10, letterSpacing:'-0.01em', color:'var(--text)'}}>{s.title}</h3>
+              <p style={{fontSize:14, color:'var(--text-muted)', lineHeight:1.7}}>{s.desc}</p>
             </div>
           ))}
         </div>
@@ -813,78 +582,52 @@ function Method() {
 function Features() {
   const features = [
     {
-      icon: <IconCalendar/>, badge:'OTOMATİK PLAN',
+      icon: <IconCalendar/>,
       title:'Otomatik Haftalık Plan',
       desc:'Günlük kapasiteni, iş/okul programını ve mevcut seviyeni hesaba katan bir haftalık çalışma programı çıkarır — sen konu seçmezsin, plan seni bekler.',
-      tags:['Kapasiteye Göre','Saatli Program']
     },
     {
-      icon: <IconTarget/>, badge:'OPTİMUM ROTA',
+      icon: <IconTarget/>,
       title:'Optimum Rota',
       desc:'Sınava kalan süre kısıtlıysa, kalan süreyi en çok etkileyecek konulara öncelik verir ve yetişmeyecek konuları objektif biçimde plan dışına alır.',
-      tags:['Kapasite Simülasyonu','Öncelik Sıralaması']
     },
     {
-      icon: <IconRepeat/>, badge:'TEKRAR SİSTEMİ',
+      icon: <IconRepeat/>,
       title:'Ebbinghaus Tekrar Sistemi',
-      desc:'Unutma eğrisine göre çalıştığın konular otomatik olarak tekrar takvimine girer — sen hangi konuyu ne zaman tekrar edeceğini takip etmek zorunda kalmazsın.',
-      tags:['Zamanlanmış Tekrar','Otomatik']
+      desc:'Unutma eğrisine göre çalıştığın konular otomatik olarak tekrar takvimine girer — hangi konuyu ne zaman tekrar edeceğini takip etmek zorunda kalmazsın.',
     },
     {
-      icon: <IconChart/>, badge:'NET & PUAN',
+      icon: <IconChart/>,
       title:'Deneme & Net Takibi',
       desc:'Deneme sonuçlarını gir, branş bazlı net ve yanlış analizini gör. Net Projektör, hedef puanına göre nerede durduğunu gösterir.',
-      tags:['Branş Analizi','Puan Projeksiyonu']
     },
   ];
 
   return (
-    <section id="ozellikler" className="pk-section" style={{padding:'100px 32px 140px', position:'relative'}}>
-      <div style={{position:'absolute',top:'40%',left:'50%',transform:'translate(-50%,-50%)',width:'60%',height:'60%',background:'radial-gradient(ellipse, rgba(212,168,87,.04) 0%, transparent 70%)',pointerEvents:'none'}}/>
-      <div style={{maxWidth:1240, margin:'0 auto'}}>
-        <div className="reveal" style={{textAlign:'center', marginBottom:80}}>
-          <div style={{display:'inline-block', marginBottom:18}}>
-            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— YETKİNLİKLER —</span>
-          </div>
-          <h2 className="pk-section-h2" style={{fontFamily:'Instrument Serif', fontSize:'clamp(36px,4.5vw,60px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, marginBottom:24, color:'#F5F0E8'}}>
-            Planlamanın <em className="gold-text" style={{fontStyle:'italic'}}>dört temel taşı.</em>
+    <section id="ozellikler" className="pk-section" style={{padding:'0 32px 120px'}}>
+      <div style={{maxWidth:1080, margin:'0 auto'}}>
+        <div className="reveal" style={{marginBottom:56}}>
+          <div className="mono" style={{fontSize:11, color:'var(--accent-bright)', fontWeight:600, letterSpacing:'.1em', marginBottom:14}}>YETKİNLİKLER</div>
+          <h2 className="pk-section-h2" style={{fontSize:'clamp(28px,3.6vw,42px)', fontWeight:700, letterSpacing:'-0.02em', lineHeight:1.15, color:'var(--text)', maxWidth:640}}>
+            Planlamanın dört temel taşı
           </h2>
-          <p style={{fontSize:16, color:'#8B92A8', maxWidth:540, margin:'0 auto', lineHeight:1.7}}>
-            Sıradan bir takip uygulaması değil — her gün ne çalışman gerektiğine senin yerine karar veren bir planlama sistemi.
-          </p>
         </div>
 
-        <div style={{display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:24}} className="pk-features-grid">
+        <div style={{display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:14}} className="pk-features-grid">
           {features.map((f,i) => (
-            <div key={i} className={`feature-card glass reveal scale d${i+1} pk-feature-card`} style={{
-              borderRadius:18, padding:'36px 32px',
-              position:'relative', overflow:'hidden'
+            <div key={i} className={`card card-hover reveal d${i+1} pk-feature-card`} style={{
+              borderRadius:'var(--radius-lg)', padding:'28px 26px'
             }}>
               <div style={{
-                position:'absolute', top:0, right:0, width:120, height:120,
-                background:'radial-gradient(circle at top right, rgba(212,168,87,.12), transparent 70%)',
-                pointerEvents:'none'
-              }}/>
-              <div style={{
-                width:54, height:54, borderRadius:12,
-                background:'linear-gradient(135deg, rgba(245,199,110,.14), rgba(184,137,63,.08))',
-                border:'1px solid rgba(212,168,87,.3)',
+                width:40, height:40, borderRadius:'var(--radius-sm)',
+                background:'var(--accent-soft)', border:'1px solid var(--accent-border)',
                 display:'flex', alignItems:'center', justifyContent:'center',
-                color:'#F5C76E', marginBottom:22
+                color:'var(--accent-bright)', marginBottom:18
               }}>
                 {f.icon}
               </div>
-              <div style={{fontSize:10, color:'#D4A857', fontWeight:700, letterSpacing:'.2em', marginBottom:10}}>{f.badge}</div>
-              <h3 style={{fontFamily:'Instrument Serif', fontSize:24, fontWeight:400, marginBottom:12, letterSpacing:'-0.01em', color:'#F5F0E8'}}>{f.title}</h3>
-              <p style={{fontSize:14, color:'#8B92A8', lineHeight:1.75, marginBottom:20}}>{f.desc}</p>
-              <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
-                {f.tags.map(t => (
-                  <span key={t} style={{
-                    background:'rgba(212,168,87,.06)', border:'1px solid rgba(212,168,87,.15)',
-                    borderRadius:6, padding:'4px 10px', fontSize:11, color:'#D4A857', fontWeight:500, letterSpacing:'.02em'
-                  }}>{t}</span>
-                ))}
-              </div>
+              <h3 style={{fontSize:16.5, fontWeight:700, marginBottom:8, letterSpacing:'-0.01em', color:'var(--text)'}}>{f.title}</h3>
+              <p style={{fontSize:13.5, color:'var(--text-muted)', lineHeight:1.65}}>{f.desc}</p>
             </div>
           ))}
         </div>
@@ -896,35 +639,33 @@ function Features() {
 /* ─── AI COACH — yalnız mobil uygulamada, planın üstünde bir katman ─── */
 function AiCoachSection() {
   return (
-    <section className="pk-section" style={{padding:'0 32px 140px'}}>
-      <div className="pk-ai-grid" style={{maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:56, alignItems:'center'}}>
-        <div className="reveal left">
-          <div style={{marginBottom:16}}>
-            <span style={{fontSize:11, color:'#D4A857', fontWeight:700, letterSpacing:'.28em'}}>MOBİL UYGULAMADA</span>
-          </div>
-          <h2 style={{fontFamily:'Instrument Serif', fontSize:'clamp(28px,3.5vw,40px)', fontWeight:400, letterSpacing:'-0.01em', lineHeight:1.15, marginBottom:18, color:'#F5F0E8'}}>
-            Planının üstüne, <em className="gold-text" style={{fontStyle:'italic'}}>konuşarak ulaşabileceğin bir koç.</em>
+    <section className="pk-section" style={{padding:'0 32px 120px'}}>
+      <div className="pk-ai-grid" style={{maxWidth:1080, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:48, alignItems:'center'}}>
+        <div className="reveal">
+          <div className="mono" style={{fontSize:11, color:'var(--accent-bright)', fontWeight:600, letterSpacing:'.1em', marginBottom:14}}>MOBİL UYGULAMADA</div>
+          <h2 style={{fontSize:'clamp(24px,3vw,32px)', fontWeight:700, letterSpacing:'-0.015em', lineHeight:1.2, marginBottom:16, color:'var(--text)'}}>
+            Planının üstüne, konuşarak ulaşabileceğin bir koç
           </h2>
-          <p style={{fontSize:14.5, color:'#8B92A8', lineHeight:1.75, marginBottom:20}}>
+          <p style={{fontSize:14, color:'var(--text-muted)', lineHeight:1.7, marginBottom:18}}>
             Asıl iş planlama motorunda biter — yapay zekâ koç, o planın üstünde soru sorabileceğin bir katman. Mobil uygulamada plan durumuna ve deneme verine bakarak yanıt verir; web'de sohbet yok, yalnızca mobilde.
           </p>
-          <p style={{fontSize:12.5, color:'#5A6178', lineHeight:1.7}}>
+          <p style={{fontSize:12.5, color:'var(--text-faint)', lineHeight:1.7}}>
             Profilin, netlerin ve plan durumun gibi kişisel verilerin yapay zekâya gönderilmeden önce rızan istenir; istediğin an bu izni geri çekebilirsin.
           </p>
         </div>
-        <div className="reveal right glass" style={{borderRadius:16, padding:20}}>
-          <div style={{display:'flex', flexDirection:'column', gap:10}}>
-            <div style={{alignSelf:'flex-end', maxWidth:'80%', background:'rgba(212,168,87,.12)', border:'1px solid rgba(212,168,87,.25)', borderRadius:'14px 14px 4px 14px', padding:'10px 14px', fontSize:13, color:'#F5F0E8'}}>
+        <div className="reveal card" style={{borderRadius:'var(--radius-lg)', padding:18}}>
+          <div style={{display:'flex', flexDirection:'column', gap:8}}>
+            <div style={{alignSelf:'flex-end', maxWidth:'80%', background:'var(--accent-soft)', border:'1px solid var(--accent-border)', borderRadius:'12px 12px 4px 12px', padding:'9px 13px', fontSize:13, color:'var(--text)'}}>
               Bu hafta Coğrafya'da neden geride kaldım?
             </div>
-            <div style={{alignSelf:'flex-start', maxWidth:'85%', background:'rgba(255,255,255,.03)', border:'1px solid rgba(255,255,255,.06)', borderRadius:'14px 14px 14px 4px', padding:'10px 14px', fontSize:13, color:'#C9C1AC', lineHeight:1.6}}>
+            <div style={{alignSelf:'flex-start', maxWidth:'85%', background:'var(--surface-2)', border:'1px solid var(--border)', borderRadius:'12px 12px 12px 4px', padding:'9px 13px', fontSize:13, color:'var(--text-muted)', lineHeight:1.6}}>
               Son denemende Coğrafya'da yanlış oranın yükseldi, bu yüzden planın bu hafta Coğrafya'ya 45 dk daha ayırdı. Bugünkü blok saat 16:00'da.
             </div>
-            <div style={{alignSelf:'flex-end', maxWidth:'70%', background:'rgba(212,168,87,.12)', border:'1px solid rgba(212,168,87,.25)', borderRadius:'14px 14px 4px 14px', padding:'10px 14px', fontSize:13, color:'#F5F0E8'}}>
+            <div style={{alignSelf:'flex-end', maxWidth:'70%', background:'var(--accent-soft)', border:'1px solid var(--accent-border)', borderRadius:'12px 12px 4px 12px', padding:'9px 13px', fontSize:13, color:'var(--text)'}}>
               Peki bu ay hedef puana göre nasıl gidiyorum?
             </div>
           </div>
-          <div style={{marginTop:14, fontSize:10.5, color:'#5A6178', borderTop:'1px solid rgba(212,168,87,.1)', paddingTop:12}}>
+          <div style={{marginTop:14, fontSize:10.5, color:'var(--text-faint)', borderTop:'1px solid var(--border)', paddingTop:12}}>
             Örnek bir konuşma akışıdır — gerçek yanıtlar senin plan ve deneme verine göre değişir.
           </div>
         </div>
@@ -936,9 +677,9 @@ function AiCoachSection() {
 /* ─── PRICING ─── */
 function Pricing() {
   const starterFeatures = [
-    {label:'Hesabını oluştur, müfredatı incele', sub:'Kayıt için kredi kartı gerekmez'},
-    {label:'Kendi görevlerini elle planla', sub:'Manuel görev ekleme'},
-    {label:'Deneme sonucu gir, net takibi yap', sub:'Branş bazlı kayıt'},
+    'Hesabını oluştur, müfredatı incele',
+    'Kendi görevlerini elle planla',
+    'Deneme sonucu gir, net takibi yap',
   ];
   const proFeatures = [
     {icon:<IconCalendar size={16}/>, label:'Otomatik Haftalık Plan', sub:'Kapasitene göre saatli çalışma programı'},
@@ -949,148 +690,106 @@ function Pricing() {
   ];
 
   return (
-    <section id="fiyat" className="pk-section" style={{padding:'140px 32px', position:'relative', overflow:'hidden'}}>
-      <div style={{position:'absolute', top:'45%', left:'50%', transform:'translate(-50%,-50%)', width:800, height:500, background:'radial-gradient(ellipse, rgba(212,168,87,.08) 0%, transparent 70%)', pointerEvents:'none'}}/>
-
-      <div style={{maxWidth:1000, margin:'0 auto', position:'relative', zIndex:1}}>
-        <div className="reveal" style={{textAlign:'center', marginBottom:64}}>
-          <div style={{marginBottom:18}}>
-            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— YATIRIM —</span>
-          </div>
-          <h2 className="pk-section-h2" style={{fontFamily:'Instrument Serif', fontSize:'clamp(36px,4.5vw,58px)', fontWeight:400, letterSpacing:'-0.015em', lineHeight:1.1, marginBottom:20, color:'#F5F0E8'}}>
-            Kariyerine giden yolda <em className="gold-text" style={{fontStyle:'italic'}}>tek bir adım.</em>
+    <section id="fiyat" className="pk-section" style={{padding:'120px 32px'}}>
+      <div style={{maxWidth:960, margin:'0 auto'}}>
+        <div className="reveal" style={{marginBottom:56}}>
+          <div className="mono" style={{fontSize:11, color:'var(--accent-bright)', fontWeight:600, letterSpacing:'.1em', marginBottom:14}}>FİYATLANDIRMA</div>
+          <h2 className="pk-section-h2" style={{fontSize:'clamp(28px,3.6vw,42px)', fontWeight:700, letterSpacing:'-0.02em', lineHeight:1.15, marginBottom:14, color:'var(--text)', maxWidth:640}}>
+            Aylık tek bir plan, sınava kadar yanında
           </h2>
-          <p style={{fontSize:15.5, color:'#8B92A8', maxWidth:540, margin:'0 auto', lineHeight:1.7}}>
-            Abonelik yok, sürpriz kesinti yok. Sınav gününe kadar tek seferlik bir ödemeyle tüm planlama gücü senin.
+          <p style={{fontSize:15, color:'var(--text-muted)', maxWidth:520, lineHeight:1.65}}>
+            İstediğin zaman iptal edebileceğin aylık bir plan — sürpriz kesinti yok.
           </p>
         </div>
 
-        <div className="pk-pricing-grid" style={{display:'grid', gridTemplateColumns:'0.95fr 1.15fr', gap:22, alignItems:'center'}}>
+        <div className="pk-pricing-grid" style={{display:'grid', gridTemplateColumns:'0.9fr 1.1fr', gap:16, alignItems:'stretch'}}>
 
-          <div className="glass feature-card reveal left" style={{
-            borderRadius:18, padding:'36px 30px',
-            position:'relative'
-          }}>
-            <div style={{display:'inline-flex',alignItems:'center',gap:6,fontSize:10,color:'#8B92A8',fontWeight:700,letterSpacing:'.18em',marginBottom:14}}>
-              <span style={{width:6,height:6,borderRadius:'50%',background:'#5A6178',display:'inline-block'}}/>
-              ÜCRETSİZ
-            </div>
-            <div style={{fontFamily:'Instrument Serif', fontSize:30, fontWeight:400, letterSpacing:'-0.01em', marginBottom:24, color:'#F5F0E8', lineHeight:1.1}}>
+          <div className="card reveal" style={{borderRadius:'var(--radius-lg)', padding:'30px 26px'}}>
+            <div className="mono" style={{fontSize:10.5,color:'var(--text-faint)',fontWeight:600,letterSpacing:'.08em',marginBottom:16}}>ÜCRETSİZ</div>
+            <div style={{fontSize:22, fontWeight:700, marginBottom:20, color:'var(--text)'}}>
               Hesabını Oluştur
             </div>
-            <div style={{marginBottom:6, display:'flex', alignItems:'flex-end', gap:6}}>
-              <span style={{fontFamily:'Instrument Serif', fontSize:60, fontWeight:400, letterSpacing:'-0.03em', color:'#F5F0E8', lineHeight:1}}>0</span>
-              <span style={{fontSize:22, fontWeight:600, color:'#8B92A8', marginBottom:10}}>TL</span>
+            <div className="mono" style={{marginBottom:4, display:'flex', alignItems:'flex-end', gap:4}}>
+              <span style={{fontSize:40, fontWeight:700, color:'var(--text)', lineHeight:1}}>0</span>
+              <span style={{fontSize:16, fontWeight:600, color:'var(--text-muted)', marginBottom:6}}>TL</span>
             </div>
-            <div style={{fontSize:12, color:'#5A6178', marginBottom:32, letterSpacing:'.01em'}}>Kredi kartı gerekmez · Anında başla</div>
+            <div style={{fontSize:12, color:'var(--text-faint)', marginBottom:26}}>Kredi kartı gerekmez</div>
 
-            <div style={{borderTop:'1px solid rgba(212,168,87,.1)', paddingTop:24, marginBottom:32}}>
+            <div style={{borderTop:'1px solid var(--border)', paddingTop:20, marginBottom:26}}>
               {starterFeatures.map((f,i) => (
-                <div key={i} style={{display:'flex', alignItems:'flex-start', gap:12, marginBottom:16}}>
-                  <div style={{width:20, height:20, borderRadius:'50%', border:'1px solid #5A6178', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:2}}>
-                    <IconCheck color="#5A6178" size={10}/>
+                <div key={i} style={{display:'flex', alignItems:'flex-start', gap:10, marginBottom:13}}>
+                  <div style={{width:16, height:16, borderRadius:'50%', border:'1px solid var(--text-faint)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:2}}>
+                    <IconCheck color="var(--text-faint)" size={8}/>
                   </div>
-                  <div>
-                    <div style={{fontSize:13.5, color:'#E8E1D2', fontWeight:500}}>{f.label}</div>
-                    <div style={{fontSize:11.5, color:'#5A6178', marginTop:2}}>{f.sub}</div>
-                  </div>
+                  <span style={{fontSize:13, color:'var(--text-muted)'}}>{f}</span>
                 </div>
               ))}
             </div>
 
             <a href={SIGNUP_HREF} style={{textDecoration:'none', display:'block'}}>
-              <button className="gold-btn-outline" style={{
-                width:'100%', padding:'14px', borderRadius:11,
-                fontFamily:'Plus Jakarta Sans',
-                fontSize:14, fontWeight:600, cursor:'pointer',
-                letterSpacing:'.01em'
+              <button className="btn-outline" style={{
+                width:'100%', padding:'12px', borderRadius:'var(--radius-md)',
+                fontFamily:'Plus Jakarta Sans', fontSize:13.5, fontWeight:600, cursor:'pointer'
               }}>
                 Ücretsiz Başla
               </button>
             </a>
           </div>
 
-          <div className="reveal right pk-pricing-pro" style={{
-            borderRadius:20,
-            padding:'40px 36px',
-            background:'linear-gradient(165deg, rgba(212,168,87,.06) 0%, rgba(184,137,63,.02) 100%), #0E1320',
-            border:'1.5px solid rgba(212,168,87,.45)',
-            boxShadow:'0 0 0 1px rgba(212,168,87,.12), 0 30px 80px rgba(212,168,87,.15), inset 0 1px 0 rgba(245,199,110,.1)',
-            position:'relative', overflow:'hidden'
+          <div className="reveal pk-pricing-pro card" style={{
+            borderRadius:'var(--radius-lg)', padding:'32px 30px',
+            borderColor:'var(--accent-border)'
           }}>
-            <div style={{position:'absolute',top:0,left:0,right:0,height:1.5,background:'linear-gradient(90deg, transparent, #F5C76E, #FFF4D6, #F5C76E, transparent)'}}/>
-            <CompassRing size={280} opacity={.05}/>
-
-            <div style={{marginBottom:18}}>
-              <span className="pk-pro-badge" style={{
-                display:'inline-flex', alignItems:'center', gap:7,
-                background:'rgba(212,168,87,.12)', border:'1px solid rgba(212,168,87,.35)',
-                borderRadius:100, padding:'5px 14px',
-                fontSize:10.5, fontWeight:700, color:'#F5C76E',
-                letterSpacing:'.18em'
-              }}>
-                <IconShield size={11}/>
-                KPSS PRO — SINAVA HAZIRLIK
-              </span>
+            <div className="mono" style={{
+              display:'inline-flex', alignItems:'center', gap:6,
+              background:'var(--accent-soft)', border:'1px solid var(--accent-border)',
+              borderRadius:100, padding:'4px 12px', marginBottom:18,
+              fontSize:10.5, fontWeight:600, color:'var(--accent-bright)', letterSpacing:'.06em'
+            }}>
+              KPSS PRO
             </div>
 
-            <div className="pk-pricing-pro-h" style={{fontFamily:'Instrument Serif', fontSize:'clamp(32px,3.5vw,44px)', fontWeight:400, letterSpacing:'-0.02em', marginBottom:14, color:'#F5F0E8', lineHeight:1.05}}>
-              Sınava Kadar<br/>
-              <span className="gold-text">Tüm Planlama Gücü.</span>
+            <div style={{fontSize:'clamp(24px,2.6vw,30px)', fontWeight:700, letterSpacing:'-0.015em', marginBottom:8, color:'var(--text)'}}>
+              Sınava kadar tüm planlama gücü
             </div>
-            <p style={{fontSize:14, color:'#8B92A8', lineHeight:1.6, marginBottom:28, maxWidth:380}}>
-              Otomatik plandan tekrar sistemine, deneme analizinden mobil AI koça kadar — tek bir ödemeyle, sınav gününe kadar açık.
+            <p style={{fontSize:13.5, color:'var(--text-muted)', lineHeight:1.6, marginBottom:22, maxWidth:380}}>
+              Otomatik plandan tekrar sistemine, deneme analizinden mobil AI koça kadar.
             </p>
 
-            <div style={{
-              background:'linear-gradient(135deg, rgba(212,168,87,.08), rgba(184,137,63,.04))',
-              border:'1px solid rgba(212,168,87,.2)',
-              borderRadius:14, padding:'18px 22px', marginBottom:30,
-              position:'relative'
+            <div className="mono" style={{
+              display:'flex', alignItems:'baseline', gap:8, marginBottom:22,
+              paddingBottom:20, borderBottom:'1px solid var(--border)'
             }}>
-              <div style={{display:'flex', alignItems:'baseline', gap:10, marginBottom:10}}>
-                <span className="pk-price-amount" style={{fontFamily:'Instrument Serif', fontSize:56, fontWeight:400, letterSpacing:'-0.03em', color:'#F5F0E8', lineHeight:1}}>{PRICE_TL}</span>
-                <span style={{fontFamily:'Instrument Serif', fontSize:28, color:'#F5C76E'}}>TL</span>
-                <span style={{fontSize:13, color:'#8B92A8', marginLeft:8, fontWeight:500}}>Tek Seferlik Ödeme</span>
-              </div>
-              <div style={{display:'flex', alignItems:'center', gap:8, paddingTop:12, borderTop:'1px dashed rgba(212,168,87,.2)'}}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F5C76E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-                <span style={{fontSize:11.5, color:'#D4A857', fontWeight:600, letterSpacing:'.02em'}}>KPSS sınav tarihine kadar erişim · abonelik yok</span>
-              </div>
+              <span className="pk-price-amount" style={{fontSize:36, fontWeight:700, color:'var(--text)', lineHeight:1}}>{PRICE_MONTHLY_TL}</span>
+              <span style={{fontSize:16, color:'var(--accent-bright)'}}>TL</span>
+              <span style={{fontSize:13, color:'var(--text-muted)', marginLeft:2}}>/ ay</span>
             </div>
 
-            <div style={{marginBottom:32}}>
+            <div style={{marginBottom:26}}>
               {proFeatures.map((f,i) => (
-                <div key={i} style={{display:'flex', alignItems:'flex-start', gap:14, marginBottom:14, padding:'4px 0'}}>
+                <div key={i} style={{display:'flex', alignItems:'flex-start', gap:12, marginBottom:13}}>
                   <div style={{
-                    width:36, height:36, borderRadius:10,
-                    background:'linear-gradient(135deg, rgba(245,199,110,.14), rgba(184,137,63,.08))',
-                    border:'1px solid rgba(212,168,87,.3)',
+                    width:30, height:30, borderRadius:'var(--radius-sm)',
+                    background:'var(--accent-soft)', border:'1px solid var(--accent-border)',
                     display:'flex', alignItems:'center', justifyContent:'center',
-                    color:'#F5C76E', flexShrink:0
+                    color:'var(--accent-bright)', flexShrink:0
                   }}>
                     {f.icon}
                   </div>
                   <div>
-                    <div style={{fontSize:14.5, color:'#F5F0E8', fontWeight:600, marginBottom:2}}>{f.label}</div>
-                    <div style={{fontSize:12, color:'#8B92A8'}}>{f.sub}</div>
+                    <div style={{fontSize:13.5, color:'var(--text)', fontWeight:600, marginBottom:1}}>{f.label}</div>
+                    <div style={{fontSize:11.5, color:'var(--text-muted)'}}>{f.sub}</div>
                   </div>
                 </div>
               ))}
             </div>
 
             <a href={SIGNUP_HREF} style={{textDecoration:'none', display:'block'}}>
-              <button className="gold-btn pk-pricing-cta" style={{
-                width:'100%', padding:'17px', borderRadius:12,
-                border:'none', fontFamily:'Plus Jakarta Sans',
-                fontSize:15.5, fontWeight:700, cursor:'pointer',
-                letterSpacing:'.005em', position:'relative', zIndex:1,
-                display:'inline-flex', alignItems:'center', justifyContent:'center', gap:10
+              <button className="btn-primary" style={{
+                width:'100%', padding:'14px', borderRadius:'var(--radius-md)',
+                fontFamily:'Plus Jakarta Sans', fontSize:14.5, fontWeight:600, cursor:'pointer'
               }}>
-                <IconShield size={14}/> {PRIMARY_CTA}
+                {PRIMARY_CTA}
               </button>
             </a>
           </div>
@@ -1111,43 +810,41 @@ function FaqSection() {
     {q:'Gösterilen puan tahmini gerçek ÖSYM puanı mı?', a:'Hayır. Gerçek KPSS puanı o yılki aday dağılımından hesaplanır ve önceden birebir üretilemez. Uygulamadaki puan tahmini yaklaşık bir modeldir ve her zaman tahmin olduğu belirtilerek gösterilir.'},
     {q:'Yapay zekâ koç nerede kullanılıyor?', a:'Yalnızca mobil uygulamada. Planın üstünde soru sorabileceğin bir sohbet katmanı ve günlük/haftalık brifingler sunar; web sürümünde sohbet özelliği yok.'},
     {q:'Kişisel verilerim yapay zekâya gönderiliyor mu?', a:'Koç sohbetini kullanmak istersen, profilin ve plan durumun gibi verilerin gönderilmeden önce açık rızan istenir. Bu izni istediğin an geri çekebilirsin.'},
-    {q:'Fiyat nedir, abonelik mi?', a:PRICE_TL + ' TL, tek seferlik ödeme. Abonelik yok — erişimin KPSS sınav tarihine kadar geçerli.'},
-    {q:'Mobil uygulama ne zaman kullanılabilir olacak?', a:'Uygulama mağaza onay sürecinde. Hazır olduğunda aynı hesabınla (web\'de oluşturduğun hesap) doğrudan giriş yapabileceksin.'},
+    {q:'Fiyat nedir, iptal edebilir miyim?', a:'Aylık ödeme — istediğin zaman iptal edebilirsin, iptal sonrası mevcut dönemin sonuna kadar erişimin devam eder.'},
+    {q:'Mobil uygulama ne zaman kullanılabilir olacak?', a:"Uygulama mağaza onay sürecinde. Hazır olduğunda aynı hesabınla (web'de oluşturduğun hesap) doğrudan giriş yapabileceksin."},
   ];
   const [open, setOpen] = useState(0);
   return (
-    <section id="sss" className="pk-section" style={{padding:'100px 32px 140px'}}>
-      <div style={{maxWidth:760, margin:'0 auto'}}>
-        <div className="reveal" style={{textAlign:'center', marginBottom:56}}>
-          <div style={{marginBottom:14}}>
-            <span style={{fontSize:11, color:'#D4A857', fontWeight:600, letterSpacing:'.32em'}}>— SIKÇA SORULANLAR —</span>
-          </div>
-          <h2 className="pk-section-h2" style={{fontFamily:'Instrument Serif', fontSize:'clamp(30px,4vw,44px)', fontWeight:400, letterSpacing:'-0.015em', color:'#F5F0E8'}}>
+    <section id="sss" className="pk-section" style={{padding:'0 32px 120px'}}>
+      <div style={{maxWidth:720, margin:'0 auto'}}>
+        <div className="reveal" style={{marginBottom:44}}>
+          <div className="mono" style={{fontSize:11, color:'var(--accent-bright)', fontWeight:600, letterSpacing:'.1em', marginBottom:14}}>SSS</div>
+          <h2 className="pk-section-h2" style={{fontSize:'clamp(26px,3.4vw,36px)', fontWeight:700, letterSpacing:'-0.02em', color:'var(--text)'}}>
             Merak ettiklerin
           </h2>
         </div>
-        <div style={{display:'flex', flexDirection:'column', gap:10}}>
+        <div style={{display:'flex', flexDirection:'column', gap:8}}>
           {faqs.map((f,i) => {
             const isOpen = open === i;
             return (
-              <div key={i} className="glass reveal" style={{borderRadius:12, overflow:'hidden'}}>
+              <div key={i} className="card reveal" style={{borderRadius:'var(--radius-md)', overflow:'hidden'}}>
                 <button onClick={() => setOpen(isOpen ? -1 : i)} style={{
                   width:'100%', background:'transparent', border:'none', cursor:'pointer',
-                  padding:'18px 20px', display:'flex', alignItems:'center', justifyContent:'space-between', gap:12,
-                  textAlign:'left', color:'#F5F0E8', fontFamily:'Plus Jakarta Sans'
+                  padding:'16px 18px', display:'flex', alignItems:'center', justifyContent:'space-between', gap:12,
+                  textAlign:'left', color:'var(--text)', fontFamily:'Plus Jakarta Sans'
                 }}>
-                  <span style={{fontSize:14.5, fontWeight:600}}>{f.q}</span>
-                  <span style={{color:'#D4A857'}}><IconChevron open={isOpen}/></span>
+                  <span style={{fontSize:14, fontWeight:600}}>{f.q}</span>
+                  <span style={{color:'var(--accent-bright)'}}><IconChevron open={isOpen}/></span>
                 </button>
                 {isOpen && (
-                  <div style={{padding:'0 20px 18px', fontSize:13.5, color:'#8B92A8', lineHeight:1.7}}>{f.a}</div>
+                  <div style={{padding:'0 18px 16px', fontSize:13, color:'var(--text-muted)', lineHeight:1.65}}>{f.a}</div>
                 )}
               </div>
             );
           })}
         </div>
-        <p style={{textAlign:'center', fontSize:12.5, color:'#5A6178', marginTop:28}}>
-          Gizlilik ve KVKK detayları için <a href={LEGAL.gizlilik} style={{color:'#D4A857'}}>Gizlilik Politikası</a>'na bakabilirsin.
+        <p style={{textAlign:'center', fontSize:12.5, color:'var(--text-faint)', marginTop:26}}>
+          Gizlilik ve KVKK detayları için <a href={LEGAL.gizlilik} style={{color:'var(--accent-bright)'}}>Gizlilik Politikası</a>'na bakabilirsin.
         </p>
       </div>
     </section>
@@ -1157,81 +854,62 @@ function FaqSection() {
 /* ─── FINAL CTA ─── */
 function FinalCTA() {
   return (
-    <section style={{padding:'120px 32px', position:'relative', overflow:'hidden'}}>
-      <div style={{position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', opacity:.5}}>
-        <CompassRing size={600} opacity={.08}/>
-      </div>
-      <div className="reveal" style={{maxWidth:640, margin:'0 auto', textAlign:'center', position:'relative', zIndex:1}}>
-        <div style={{
-          width:64, height:64, margin:'0 auto 28px',
-          background:'linear-gradient(135deg, #F5C76E, #B8893F)',
-          borderRadius:'50%',
-          display:'flex', alignItems:'center', justifyContent:'center',
-          color:'#1A1206',
-          boxShadow:'0 0 40px rgba(212,168,87,.4)'
-        }}>
-          <IconCompass size={28}/>
-        </div>
-
-        <h2 style={{fontFamily:'Instrument Serif', fontSize:'clamp(34px,5vw,54px)', fontWeight:400, letterSpacing:'-0.02em', lineHeight:1.1, marginBottom:22, color:'#F5F0E8'}}>
+    <section style={{padding:'100px 32px'}}>
+      <div className="reveal" style={{maxWidth:600, margin:'0 auto', textAlign:'center'}}>
+        <h2 style={{fontSize:'clamp(30px,4.4vw,46px)', fontWeight:700, letterSpacing:'-0.02em', lineHeight:1.15, marginBottom:18, color:'var(--text)'}}>
           Masada "Bugün Ne Çalışsam?"<br/>
-          <em className="gold-text" style={{fontStyle:'italic'}}>Krizine Son Ver.</em>
+          <span className="accent-text">Krizine Son Ver.</span>
         </h2>
-        <p style={{fontSize:16, color:'#8B92A8', lineHeight:1.75, marginBottom:36, maxWidth:480, margin:'0 auto 36px'}}>
+        <p style={{fontSize:15.5, color:'var(--text-muted)', lineHeight:1.7, marginBottom:32, maxWidth:440, margin:'0 auto 32px'}}>
           Kendi çalışma rotanı bugün oluştur. Hesap oluşturmak ücretsiz, kredi kartı gerekmez.
         </p>
 
         <a href={SIGNUP_HREF} style={{textDecoration:'none'}}>
-          <button className="gold-btn" style={{
-            border:'none', borderRadius:12, padding:'17px 40px',
-            fontFamily:'Plus Jakarta Sans', fontSize:15.5, fontWeight:700, cursor:'pointer',
-            letterSpacing:'.005em', position:'relative', zIndex:1, whiteSpace:'nowrap'
+          <button className="btn-primary" style={{
+            borderRadius:'var(--radius-md)', padding:'15px 32px',
+            fontFamily:'Plus Jakarta Sans', fontSize:15, fontWeight:600, cursor:'pointer', whiteSpace:'nowrap'
           }}>
             {PRIMARY_CTA}
           </button>
         </a>
 
-        <div style={{fontSize:12, color:'#5A6178', marginTop:18, letterSpacing:'.02em'}}>
-          Zaten hesabın var mı? <a href={SIGNIN_HREF} style={{color:'#D4A857', textDecoration:'none'}}>Giriş yap</a>
+        <div style={{fontSize:12.5, color:'var(--text-faint)', marginTop:16}}>
+          Zaten hesabın var mı? <a href={SIGNIN_HREF} style={{color:'var(--accent-bright)', textDecoration:'none'}}>Giriş yap</a>
         </div>
 
-        <div style={{marginTop:64, display:'flex', flexDirection:'column', alignItems:'center', gap:18}}>
-          <div style={{
+        <div style={{marginTop:56, display:'flex', flexDirection:'column', alignItems:'center', gap:16}}>
+          <div className="mono" style={{
             display:'inline-flex', alignItems:'center', gap:6,
-            background:'rgba(212,168,87,.1)', border:'1px solid rgba(212,168,87,.35)',
-            borderRadius:100, padding:'5px 14px',
-            fontSize:10.5, fontWeight:700, color:'#F5C76E', letterSpacing:'.18em'
+            border:'1px solid var(--border)',
+            borderRadius:100, padding:'5px 13px',
+            fontSize:10.5, fontWeight:600, color:'var(--text-muted)', letterSpacing:'.06em'
           }}>
-            <span style={{width:5,height:5,borderRadius:'50%',background:'#F5C76E'}}/>
             MOBİL UYGULAMA ÇOK YAKINDA
           </div>
 
-          <div className="pk-appstores" style={{display:'flex', gap:12}}>
-            <div className="glass" style={{opacity:.55, borderRadius:12, padding:'10px 20px', display:'flex', alignItems:'center', gap:12, userSelect:'none'}}>
-              <svg width="22" height="26" viewBox="0 0 20 24" fill="#F5F0E8">
+          <div className="pk-appstores" style={{display:'flex', gap:10}}>
+            <div className="card" style={{opacity:.5, borderRadius:'var(--radius-md)', padding:'9px 18px', display:'flex', alignItems:'center', gap:10, userSelect:'none'}}>
+              <svg width="20" height="24" viewBox="0 0 20 24" fill="var(--text)">
                 <path d="M14.94 5.19A4.38 4.38 0 0 0 16 2a4.44 4.44 0 0 0-3 1.52 4.17 4.17 0 0 0-1 3.09 3.69 3.69 0 0 0 2.94-1.42zm2.52 7.44a4.51 4.51 0 0 1 2.16-3.81 4.66 4.66 0 0 0-3.66-2c-1.56-.16-3 .91-3.83.91-.83 0-2-.89-3.3-.87A4.92 4.92 0 0 0 4.69 9.4C2.93 12.45 4.24 17 6 19.47c.8 1.21 1.8 2.59 3.12 2.54 1.23-.05 1.72-.81 3.22-.81 1.5 0 1.9.81 3.22.79 1.32-.02 2.22-1.24 3.06-2.45a11 11 0 0 0 1.38-2.85 4.41 4.41 0 0 1-2.54-4.06z"/>
               </svg>
               <div style={{textAlign:'left'}}>
-                <div style={{fontSize:9, color:'#8B92A8', letterSpacing:'.06em'}}>DOWNLOAD ON THE</div>
-                <div style={{fontSize:14, color:'#F5F0E8', fontWeight:700, lineHeight:1.2}}>App Store</div>
+                <div style={{fontSize:8.5, color:'var(--text-faint)'}}>DOWNLOAD ON THE</div>
+                <div style={{fontSize:13, color:'var(--text)', fontWeight:700, lineHeight:1.2}}>App Store</div>
               </div>
             </div>
-            <div className="glass" style={{opacity:.55, borderRadius:12, padding:'10px 20px', display:'flex', alignItems:'center', gap:12, userSelect:'none'}}>
-              <svg width="23" height="26" viewBox="0 0 21 24" fill="none">
+            <div className="card" style={{opacity:.5, borderRadius:'var(--radius-md)', padding:'9px 18px', display:'flex', alignItems:'center', gap:10, userSelect:'none'}}>
+              <svg width="21" height="24" viewBox="0 0 21 24" fill="none">
                 <path d="M1.22.84 12.2 12 1.22 23.16A2 2 0 0 1 0 21.38V2.62A2 2 0 0 1 1.22.84z" fill="#EA4335"/>
                 <path d="M17.56 9.86 14.4 12l3.16 2.14 2.94-1.7a1 1 0 0 0 0-1.88l-2.94-1.7z" fill="#FBBC04"/>
                 <path d="M12.2 12 1.22.84l13.18 7.58L12.2 12z" fill="#4285F4"/>
                 <path d="M12.2 12l2.2 2.58L1.22 23.16 12.2 12z" fill="#34A853"/>
               </svg>
               <div style={{textAlign:'left'}}>
-                <div style={{fontSize:9, color:'#8B92A8', letterSpacing:'.06em'}}>GET IT ON</div>
-                <div style={{fontSize:14, color:'#F5F0E8', fontWeight:700, lineHeight:1.2}}>Google Play</div>
+                <div style={{fontSize:8.5, color:'var(--text-faint)'}}>GET IT ON</div>
+                <div style={{fontSize:13, color:'var(--text)', fontWeight:700, lineHeight:1.2}}>Google Play</div>
               </div>
             </div>
           </div>
-          <p style={{fontFamily:'Instrument Serif', fontStyle:'italic', fontSize:14, color:'#5A6178', letterSpacing:'.01em'}}>
-            Mağaza onayı tamamlanınca aynı hesabınla mobilde de kullanabileceksin.
-          </p>
         </div>
       </div>
     </section>
@@ -1241,25 +919,25 @@ function FinalCTA() {
 /* ─── FOOTER ─── */
 function Footer() {
   return (
-    <footer style={{borderTop:'1px solid rgba(212,168,87,.1)', padding:'48px 32px', position:'relative'}}>
-      <div className="pk-footer-inner" style={{maxWidth:1240, margin:'0 auto', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:24}}>
-        <div style={{display:'flex',alignItems:'center',gap:11}}>
-          <div style={{width:30, height:30, background:'linear-gradient(135deg, #F5C76E, #B8893F)', borderRadius:7, display:'flex', alignItems:'center', justifyContent:'center', color:'#1A1206'}}>
-            <IconCompass size={16}/>
+    <footer style={{borderTop:'1px solid var(--border)', padding:'40px 32px'}}>
+      <div className="pk-footer-inner" style={{maxWidth:1180, margin:'0 auto', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:20}}>
+        <div style={{display:'flex',alignItems:'center',gap:9}}>
+          <div style={{width:26, height:26, background:'var(--accent)', borderRadius:'var(--radius-sm)', display:'flex', alignItems:'center', justifyContent:'center', color:'#14110A'}}>
+            <IconCompass size={14}/>
           </div>
-          <div style={{display:'flex',alignItems:'baseline',gap:7}}>
-            <span style={{fontFamily:'Instrument Serif', fontSize:19, color:'#F5F0E8', lineHeight:1}}>Pusula</span>
-            <span style={{fontSize:9, color:'#D4A857', letterSpacing:'.32em', fontWeight:700}}>KPSS</span>
+          <div style={{display:'flex',alignItems:'baseline',gap:6}}>
+            <span style={{fontSize:14, fontWeight:700, color:'var(--text)'}}>Pusula</span>
+            <span className="mono" style={{fontSize:9, color:'var(--accent-bright)', letterSpacing:'.14em', fontWeight:600}}>KPSS</span>
           </div>
         </div>
-        <div style={{fontSize:12.5, color:'#5A6178', letterSpacing:'.02em'}}>
-          © 2026 Pusula KPSS · <a href={"mailto:"+SUPPORT_EMAIL} style={{color:'#5A6178'}}>{SUPPORT_EMAIL}</a>
+        <div style={{fontSize:12.5, color:'var(--text-faint)'}}>
+          © 2026 Pusula KPSS · <a href={"mailto:"+SUPPORT_EMAIL} style={{color:'var(--text-faint)'}}>{SUPPORT_EMAIL}</a>
         </div>
-        <div className="pk-footer-links" style={{display:'flex',gap:28}}>
+        <div className="pk-footer-links" style={{display:'flex',gap:24}}>
           {[['Gizlilik', LEGAL.gizlilik],['Mesafeli Satış', LEGAL.mesafeli],['İade / Cayma', LEGAL.iade]].map(([l,href]) => (
-            <a key={l} href={href} style={{fontSize:12.5, color:'#5A6178', textDecoration:'none', transition:'color .2s', letterSpacing:'.02em'}}
-              onMouseEnter={e=>e.target.style.color='#F5C76E'}
-              onMouseLeave={e=>e.target.style.color='#5A6178'}>{l}</a>
+            <a key={l} href={href} style={{fontSize:12.5, color:'var(--text-faint)', textDecoration:'none', transition:'color .15s'}}
+              onMouseEnter={e=>e.target.style.color='var(--accent-bright)'}
+              onMouseLeave={e=>e.target.style.color='var(--text-faint)'}>{l}</a>
           ))}
         </div>
       </div>
@@ -1287,7 +965,6 @@ function App() {
       <Navbar/>
       <Hero/>
       <ProblemSection/>
-      <PriceComparison/>
       <Method/>
       <Features/>
       <AiCoachSection/>
